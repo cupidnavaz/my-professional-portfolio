@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews — Uchenna Godswill</title>
+<meta name="description" content="Uchenna Godswill — data analytics, design, development and agile delivery. Founder of CupidCreativeX.">
+<link rel="icon" type="image/png" href="assets/cupidcreativex-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="sub">
+
+<div class="bg-glow"></div>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><img src="assets/cupidcreativex-mark.png" alt="CupidCreativeX"> Uchenna Godswill .U.</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="ventures.html">Ventures</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a class="active" href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks">☰</button>
+      <button type="button" class="btn btn-primary" data-open-quiz>Start a project</button>
+    </div>
+  </nav>
+</header>
+<section class="pg-hero"><div class="wrap"><p class="breadcrumb"><a href="index.html">Home</a> / Reviews</p>
+<p class="pg-eyebrow">Social proof</p><h1>Client <span class="accent">reviews</span></h1><p class="lead">What clients say about working together, and a place to leave your own.</p></div></section>
+<section id="testimonials" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What Clients Say</p>
+      <h2>Feedback from the work</h2>
+    </div>
+    <!-- EDIT ME: swap in real testimonials -->
+    <div class="testi-grid" data-reveal-stagger>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">Cut our reporting time dramatically and the dashboard just made sense to everyone on the team from day one.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">SM</div>
+          <div><b>Sara Mensah</b><span>Ops Lead, Northstar</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">Rare to find someone who can design the interface and then actually ship the code themselves.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">DK</div>
+          <div><b>David Kim</b><span>Founder, Loomwell</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">The brand system held up perfectly as we scaled from 3 people to 30. Still using it today.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">RA</div>
+          <div><b>Renata Alvez</b><span>CEO, Aperture</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RATE US & TESTIMONIAL ============ -->
+<section id="rate-us">
+  <div class="wrap contact-grid">
+    <div class="contact-info" data-reveal>
+      <p class="eyebrow">Rate My Work</p>
+      <h2>How did I do?</h2>
+      <p>Worked with me on a project? I'd love to hear how it went — your rating and testimonial help other clients know what to expect.</p>
+      <div class="stat-row" style="margin-top:28px; padding-top:0; border-top:none;">
+        <!-- EDIT ME: swap in your real aggregate numbers once you have reviews coming in -->
+        <div class="stat"><b>4.9★</b><span>Average rating</span></div>
+        <div class="stat"><b>12+</b><span>Client reviews</span></div>
+      </div>
+    </div>
+    <div data-reveal>
+      <form id="rateForm">
+        <div class="rate-stars" id="rateStars">
+          <button type="button" class="rate-star" data-value="1" aria-label="1 star">★</button>
+          <button type="button" class="rate-star" data-value="2" aria-label="2 stars">★</button>
+          <button type="button" class="rate-star" data-value="3" aria-label="3 stars">★</button>
+          <button type="button" class="rate-star" data-value="4" aria-label="4 stars">★</button>
+          <button type="button" class="rate-star" data-value="5" aria-label="5 stars">★</button>
+        </div>
+        <p class="form-note" id="rateHint" style="margin-bottom:18px;">Tap a star to rate your experience.</p>
+        <div class="field">
+          <label for="rateName">Your name</label>
+          <input id="rateName" type="text" placeholder="Jordan Lee" required>
+        </div>
+        <div class="field">
+          <label for="rateRole">Role / Company (optional)</label>
+          <input id="rateRole" type="text" placeholder="Founder, Acme Co.">
+        </div>
+        <div class="field">
+          <label for="rateMsg">Your testimonial</label>
+          <textarea id="rateMsg" placeholder="Tell others what it was like working together..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit review</button>
+        <p class="form-note" style="margin-top:10px;">Opens your email app with your review pre-filled — hit send and it goes straight to me.</p>
+      </form>
+
+      <div class="rate-success" id="rateSuccess">
+        <div class="check">✓</div>
+        <h3>Thank you!</h3>
+        <p class="book-sub" id="rateStatus">Your review means a lot — I'll get it added to the site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Uchenna Godswill · Founder, CupidCreativeX Ventures. Built with intent, not templates.</p>
+    <p>Data · Design · Development · Agile</p>
+  </div>
+</footer>
+
+<!-- ============ BIO CARD MODAL ============ -->
+<div class="bio-overlay" id="bioOverlay" role="dialog" aria-modal="true" aria-labelledby="bioName">
+  <div class="bio-modal">
+    <button class="book-close" id="bioClose" aria-label="Close bio card">✕</button>
+
+    <div class="bio-header">
+      <div class="avatar-frame bio-avatar">
+        <div class="avatar-inner">
+          <!-- EDIT ME: swap for your real photo -> <img src="assets/your-photo.jpg" alt="Uchenna Godswill"> -->
+          <img src="assets/cupidcreativex-mark.png" alt="Uchenna Godswill">
+        </div>
+      </div>
+      <h3 id="bioName">Uchenna Godswill .U.</h3>
+      <p class="bio-title">Founder, CupidCreativeX Ventures</p>
+      <span class="bio-badge">🟢 Available for new projects</span>
+    </div>
+
+    <div class="bio-facts">
+      <div><span>📍 Location</span><b><!-- EDIT ME -->Your City, Country</b></div>
+      <div><span> 🕒 Experience</span><b> 5+ years</b></div>
+      <div><span> ✉️ Email</span><b><a href="mailto: uchennagodswill9@gmail.com">uchennagodswill9@gmail.com</a></b></div>
+      <div><span> 📞 Phone</span><b><a href="tel:+2349039454419"> +2349039454419</a></b></div>
+    </div>
+
+    <div class="bio-section">
+      <h4>About</h4>
+      <p>I’m a detail‑driven Web Developer and Data Analyst who transforms raw data into clear, actionable insights that help businesses grow, optimize operations, and improve customer experiences. My work spans sales performance analysis, onboarding optimization, A/B testing, dashboard automation, Seo integration, Database management, Customer support & time attendance analytics — all focused on delivering measurable results.
+<br>
+I specialize in building automated BI dashboards, scalable seo integrated and responsive web applications, incovering trends that guide strategic decisions, and partnering with stakeholders to solve real business problems. Whether it’s improving retention, boosting sales, or streamlining reporting workflows, I bring a mix of technical skill and business insight that helps teams act faster and smarter.
+<br>
+My toolkit includes Power BI, Tableau, SQL, Python, and advanced Excel — supported by strong communication, problem‑solving, and analytical thinking. I’m passionate about continuous learning and using data to create meaningful impact.
+
+If you’re looking for a data analyst who blends technical expertise with strategic thinking and consistently delivers results, let’s connect.</p>
+    </div>
+
+    <div class="bio-section">
+      <h4>Core Values</h4>
+      <div class="pill-row">
+        <span class="pill">Data-first thinking</span>
+        <span class="pill">Systems over one-offs</span>
+        <span  class="pill">Python Analytics</span>
+        <span  class="pill">Business Intelligence (Ms Excel, Power BI, Tableau)</span>
+        <span  class="pill">Stakeholder Collaboration</span>
+        <span  class="pill">Predictive Analytics</span>
+        <span  class="pill">SQL</span>
+        <span  class="pill">Web Dev(HTML,CSS,JS,REACT,PHP,WordPress)</span>
+        <span class="pill">Agile project management practices</span>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <h4>Core Expertise</h4>
+      <div class="bio-tags">
+        <span>💻 Web &amp; App Development</span>
+        <span>🤖 Generative AI Services</span>
+        <span>🎨 UI/UX Design</span>
+        <span>📊 Data Analytics &amp; Insights</span>
+        <span>🖌️ Graphics Design</span>
+        <span>🧭 Digital Consultation</span>
+        <span>📣 Digital Marketing</span>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <h4>Professional Experience</h4>
+      <div class="bio-timeline">
+        <div class="tl-item"><b>SEAHORSE LUBRICANT INDUSTRIES LIMITED - ICT PERSONNEL</b><span>Started the Journey in the world of designing, stunning visual creations, UI design, UX Researching &amp; Designing, CMS designs</span></div>
+        <div class="tl-item"><b>2021</b><span>Decided to find out what actually works behind the visual aspects. Moved into Web Dev (HTML, CSS, JavaScript, WordPress) then into PHP, plugin &amp; theme development, RESTful APIs development and integration, SEO keyword writing and integration...</span></div>
+        <div class="tl-item"><b>2022</b><span>Added full-stack development to close the design-to-code gap.</span></div>
+        <div class="tl-item"><b>2023 &amp; 2024</b><span>Delivered my highest number of projects in web development.</span></div>
+        <div class="tl-item"><b>2025</b><span>Got a job as an organization's IT support personnel &amp; systems analyst — the role of bridging a business organization and their IT needs sparked the zeal into Data Analysis &amp; Project Management.</span></div>
+        <div class="tl-item"><b>2026</b><span>Now leading teams all the way through the SDLC — analyzing, planning, designing, developing, testing and delivering — with data-driven processes and decisions at every step. The journey continues...</span></div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <h4>Connect</h4>
+      <div class="social-row">
+        <a href="#" aria-label="Twitter / X">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Instagram">◎</a>
+      </div>
+    </div>
+
+    <div class="bio-cta-row">
+      <button type="button" class="btn btn-ghost" id="bioBookBtn">Book a Consultation</button>
+      <button type="button" class="btn btn-primary" data-open-quiz>Start a Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL MODAL ============ -->
+<div class="project-overlay" id="projectOverlay" role="dialog" aria-modal="true" aria-labelledby="projTitle">
+  <div class="project-modal">
+    <button class="book-close" id="projectClose" aria-label="Close project details">✕</button>
+
+    <div class="proj-carousel">
+      <div class="proj-slides" id="projSlides"></div>
+      <button type="button" class="proj-arrow proj-prev" id="projPrev" aria-label="Previous image">‹</button>
+      <button type="button" class="proj-arrow proj-next" id="projNext" aria-label="Next image">›</button>
+      <div class="proj-dots" id="projDots"></div>
+    </div>
+
+    <div class="proj-body">
+      <span class="project-tag" id="projTag"></span>
+      <h3 id="projTitle"></h3>
+      <div class="proj-meta">
+        <span>🏢 Client: <b id="projClient"></b></span>
+        <span>⏱️ Duration: <b id="projDuration"></b></span>
+      </div>
+
+      <p class="proj-desc" id="projOverview"></p>
+
+      <div class="proj-section">
+        <h4>Client Request</h4>
+        <p id="projRequest"></p>
+      </div>
+      <div class="proj-section">
+        <h4>Challenge</h4>
+        <p id="projChallenge"></p>
+      </div>
+      <div class="proj-section">
+        <h4>Solution</h4>
+        <p id="projSolution"></p>
+      </div>
+      <div class="proj-section">
+        <h4>Results</h4>
+        <p id="projResults"></p>
+      </div>
+
+      <div class="proj-section">
+        <h4>Tools &amp; Technologies</h4>
+        <div class="proj-tools" id="projTools"></div>
+      </div>
+
+      <div style="margin-top:26px;">
+        <button type="button" class="btn btn-primary" id="projCTA" data-open-quiz>Start a similar project</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROJECT QUIZ ============ -->
+<div class="quiz-overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+  <div class="quiz-modal">
+    <button class="book-close" id="quizClose" aria-label="Close quiz">✕</button>
+
+    <p class="quiz-step-label" id="quizStepLabel">Step 1 of 5</p>
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="quizProgressBar"></div></div>
+
+    <h3 id="quizTitle">Which service(s) do you need?</h3>
+    <p class="quiz-sub" id="quizSub">Select everything that applies — I'll tailor the next questions to your picks.</p>
+
+    <div id="quizBody"></div>
+
+    <div class="quiz-nav">
+      <button type="button" class="btn btn-ghost" id="quizBack">← Back</button>
+      <button type="button" class="btn btn-primary" id="quizNext">Next →</button>
+    </div>
+
+    <div class="quiz-success" id="quizSuccess">
+      <div class="check">✓</div>
+      <h3>Request sent!</h3>
+      <p class="quiz-sub" id="quizStatus">Your email app should have opened with everything filled in — just hit send and I'll be in touch.</p>
+      <p style="font-weight:600; margin:16px 0 10px;">Do you have more enquiries?</p>
+      <div class="quiz-followup">
+        <button class="btn btn-ghost" id="quizMoreYes">Yes, book a consultation</button>
+        <button class="btn btn-ghost" id="quizMoreNo">No, I'm all set</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONSULTATION BOOKING ============ -->
+<button class="book-fab" id="bookFab" aria-haspopup="dialog" aria-controls="bookOverlay">
+  🗓️ Book a Consultation
+</button>
+
+<div class="book-overlay" id="bookOverlay" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+  <div class="book-modal">
+    <button class="book-close" id="bookClose" aria-label="Close booking form">✕</button>
+
+    <div id="bookForm">
+      <div class="avatar-frame">
+        <div class="avatar-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#9ba7d1" stroke-width="1.4">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+          </svg>
+        </div>
+      </div>
+      <h3 id="bookTitle">Book a 1:1 consultation</h3>
+      <p class="book-sub">30 minutes with me, no charge — let's talk through your project before anything is scoped.</p>
+      <form id="consultForm">
+        <div class="field">
+          <label for="bName">Your name</label>
+          <input id="bName" type="text" placeholder="Jordan Lee" required>
+        </div>
+        <div class="field">
+          <label for="bEmail">Email address</label>
+          <input id="bEmail" type="email" placeholder="jordan@company.com" required>
+        </div>
+        <div class="field">
+          <label for="bDate">Preferred date &amp; time</label>
+          <input id="bDate" type="datetime-local" required>
+        </div>
+        <div class="field">
+          <label for="bMsg">What's on your mind?</label>
+          <textarea id="bMsg" placeholder="A quick line about your project..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="bookSubmitBtn" style="width:100%; justify-content:center; margin-top:4px;">
+          Request consultation
+        </button>
+        <p class="form-note" style="margin-top:10px;">Sent straight to Uchenna — you'll see a delivery confirmation below once it's through.</p>
+      </form>
+    </div>
+
+    <div class="book-success" id="bookSuccess">
+      <div class="check">✓</div>
+      <h3>Request sent!</h3>
+      <p class="book-sub" id="bookStatus">Thanks — I'll get back to you shortly to confirm the time.</p>
+      <button class="btn btn-ghost" id="bookAgain" style="width:100%; justify-content:center;">Book another slot</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+
+<script src="script.js"></script>
+</body>
+</html>
