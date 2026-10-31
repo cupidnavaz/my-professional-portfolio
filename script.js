@@ -9,7 +9,7 @@
 //    confirmation. Sign up free at https://formspree.io, create a form,
 //    then paste its endpoint below (Settings -> Integration -> your endpoint
 //    looks like https://formspree.io/f/abcdwxyz).
-var FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'; // EDIT ME
+var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpppjbgo'; // EDIT ME
 
 // 2) SUPABASE — a free hosted database. This is what makes reviews (and
 //    every other submission) actually persist for every visitor instead of
