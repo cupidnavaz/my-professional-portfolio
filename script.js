@@ -9,7 +9,6 @@
 //    confirmation. Sign up free at https://formspree.io, create a form,
 //    then paste its endpoint below (Settings -> Integration -> your endpoint
 //    looks like https://formspree.io/f/abcdwxyz).
-var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpppjbgo'; // EDIT ME
 
 // 2) SUPABASE — a free hosted database. This is what makes reviews (and
 //    every other submission) actually persist for every visitor instead of
@@ -17,8 +16,6 @@ var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpppjbgo'; // EDIT ME
 //    create a project, run the SQL in supabase-setup.sql (included alongside
 //    this file) in the Supabase SQL Editor, then copy these two values from
 //    Project Settings -> API.
-var SUPABASE_URL = 'https://ajdsdckaucivcjeslxuc.supabase.co'; // EDIT ME
-var SUPABASE_ANON_KEY = 'sb_publishable_1sFqR3Dk3bhQkeLWgqlj_A_0uELR7mF'; // EDIT ME
 
 var FORMSPREE_READY = FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') === -1;
 var SUPABASE_READY = SUPABASE_URL.indexOf('YOUR_PROJECT') === -1 &&
@@ -46,7 +43,7 @@ function storeRecord(table, record){
       'Content-Type':'application/json',
       'apikey': SUPABASE_ANON_KEY,
       'Authorization':'Bearer ' + SUPABASE_ANON_KEY,
-      'Prefer':'return=representation'
+      'Prefer':'return=minimal'
     },
     body: JSON.stringify(record)
   }).then(function(res){
@@ -232,11 +229,11 @@ function mailtoFallback(subject, bodyText){
       btn.classList.add('active');
       var cat = btn.getAttribute('data-filter');
       if(cat === 'all'){
-        cards.forEach(function(c){ c.removeAttribute('data-hide'); });
-        blocks.forEach(function(b){ b.style.display = ''; });
+        document.querySelectorAll('.project-card').forEach(function(c){ c.removeAttribute('data-hide'); });
+        document.querySelectorAll('.category-block').forEach(function(b){ b.style.display = ''; });
         return;
       }
-      blocks.forEach(function(b){
+      document.querySelectorAll('.category-block').forEach(function(b){
         var visibleInBlock = 0;
         b.querySelectorAll('.project-card').forEach(function(c){
           if(c.getAttribute('data-cat') === cat){
@@ -781,6 +778,7 @@ function mailtoFallback(subject, bodyText){
     document.body.style.overflow = '';
   }
 
+  window.__openProject = openProject; window.__projectsData = PROJECTS_DATA;
   // Trigger from any element with data-open-project (reads slug from closest .project-card id)
   document.querySelectorAll('[data-open-project]').forEach(function(el){
     el.addEventListener('click', function(e){

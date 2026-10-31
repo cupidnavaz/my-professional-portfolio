@@ -1067,3 +1067,5 @@ body.sub .pg-hero{ padding:88px 0 60px; }
 .pg-cta h2{ font-size:26px; margin-bottom:6px; }
 .pg-cta p{ color:var(--ink-dim); }
 @media(max-width:640px){ .pg-hero{ padding:64px 0 44px; } .pg-cta .wrap{ padding:26px 22px; } }
+
+.admin-only[hidden]{ display:none !important; }
