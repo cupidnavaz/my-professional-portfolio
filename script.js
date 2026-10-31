@@ -17,8 +17,8 @@ var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpppjbgo'; // EDIT ME
 //    create a project, run the SQL in supabase-setup.sql (included alongside
 //    this file) in the Supabase SQL Editor, then copy these two values from
 //    Project Settings -> API.
-var SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'; // EDIT ME
-var SUPABASE_ANON_KEY = 'YOUR_ANON_PUBLIC_KEY'; // EDIT ME
+var SUPABASE_URL = 'https://ajdsdckaucivcjeslxuc.supabase.co'; // EDIT ME
+var SUPABASE_ANON_KEY = 'sb_publishable_1sFqR3Dk3bhQkeLWgqlj_A_0uELR7mF'; // EDIT ME
 
 var FORMSPREE_READY = FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') === -1;
 var SUPABASE_READY = SUPABASE_URL.indexOf('YOUR_PROJECT') === -1 &&
