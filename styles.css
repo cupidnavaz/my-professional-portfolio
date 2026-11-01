@@ -1162,3 +1162,36 @@ body.nav-lock{overflow:hidden}
 .rec-box input:focus,.rec-box select:focus,.rec-box textarea:focus{outline:2px solid var(--orange);border-color:transparent}
 #recMsg{min-height:22px;color:var(--ink-dim);font-size:14px}
 @media(max-width:760px){.vision-card{grid-template-columns:1fr;padding:28px 22px}.rec-row{grid-template-columns:1fr}.cv-box{padding:26px 22px}.cv-modal{height:94vh}}
+
+/* ===== bio card modal (v2) ===== */
+.bio-modal.bio2{max-width:760px;padding:0;overflow:hidden;display:flex;flex-direction:column;max-height:92vh}
+.bio-cover{height:120px;flex:none;background:radial-gradient(260px 160px at 15% 20%,rgba(76,127,255,.6),transparent 70%),radial-gradient(260px 160px at 85% 80%,rgba(245,130,31,.55),transparent 70%),linear-gradient(135deg,#141b4d,#2a1a4f);background-size:140% 140%;animation:drift 12s ease-in-out infinite alternate}
+.bio2 .book-close{z-index:3}
+.bio-head2{display:flex;gap:18px;align-items:flex-end;padding:0 32px;margin-top:-46px;position:relative}
+.bio2 .bio-avatar{width:96px;height:96px;margin:0;flex:none;box-shadow:0 0 0 4px var(--bg-card)}
+.bio-id{padding-bottom:4px;min-width:0}.bio-id h3{font-size:24px;margin:0 0 2px}.bio-id .bio-title{margin:0 0 8px}
+.bio-badge .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4fd1c5;margin-right:6px;animation:pulseDot 1.8s infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(79,209,197,.6)}70%{box-shadow:0 0 0 8px rgba(79,209,197,0)}100%{box-shadow:0 0 0 0 rgba(79,209,197,0)}}
+.bio-actions{display:flex;gap:10px;flex-wrap:wrap;padding:18px 32px 4px}.bio-actions .btn{padding:10px 16px;font-size:14px}
+.bio-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 32px}
+.bio-stats div{text-align:center;padding:12px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.bio-stats b{display:block;font:700 22px 'Space Grotesk',sans-serif;color:var(--orange)}.bio-stats span{font-size:12px;color:var(--ink-dim)}
+.bio-tabs{display:flex;gap:6px;padding:6px 32px 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}.bio-tabs::-webkit-scrollbar{display:none}
+.bio-tabs button{background:none;border:0;color:var(--ink-dim);padding:12px 14px;font:500 14px Inter,sans-serif;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:.2s}
+.bio-tabs button:hover{color:#fff}.bio-tabs button.on{color:var(--orange);border-bottom-color:var(--orange)}
+.bio-body{padding:22px 32px 30px;overflow-y:auto;flex:1}
+.bio-pane{animation:paneIn .35s ease}.bio-pane[hidden]{display:none}.bio-pane p{color:var(--ink-dim);font-size:14.5px;line-height:1.7;margin-bottom:12px}
+.bio-pane h4{font:600 12px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin:6px 0 12px}
+.bio-pane .pill-row{margin-bottom:18px}.bio-cta-line{margin-top:18px}.bio-pane .bio-actions{padding:6px 0 0}
+.bio-facts2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.bio-facts2 div{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.bio-facts2 span{font-size:11.5px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em}.bio-facts2 b{font-size:13.5px;font-weight:600;word-break:break-word}.bio-facts2 a{color:#fff}.bio-facts2 a:hover{color:var(--orange)}
+@keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.bio-head2{padding:0 18px;flex-direction:column;align-items:flex-start;gap:10px}.bio-actions,.bio-stats,.bio-body{padding-left:18px;padding-right:18px}.bio-tabs{padding-left:12px}.bio-facts2{grid-template-columns:1fr}.bio-modal.bio2{max-height:94vh}}
+
+/* ===== switchable contact / rate section ===== */
+.switch-tabs{display:flex;gap:6px;width:max-content;max-width:100%;margin:0 auto 36px;padding:6px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.switch-tabs button{border:0;background:transparent;color:var(--ink-dim);padding:12px 26px;border-radius:99px;font:600 15px Inter,sans-serif;cursor:pointer;transition:.25s;white-space:nowrap}
+.switch-tabs button:hover{color:#fff}.switch-tabs button.on{background:linear-gradient(135deg,var(--orange),#ff9d4d);color:#1a1000;box-shadow:0 8px 22px rgba(245,130,31,.35)}
+.switch-pane[hidden]{display:none}.switch-pane.pane-in{animation:paneIn .45s cubic-bezier(.2,.8,.2,1)}
+@media(max-width:480px){.switch-tabs{width:100%}.switch-tabs button{flex:1;padding:12px 10px;font-size:14px}}

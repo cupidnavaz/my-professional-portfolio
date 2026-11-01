@@ -56,4 +56,24 @@
   });
   // recommendation form fallback when Supabase isn't configured
   var rf=$('#recForm'); if(rf) rf.addEventListener('submit',function(e){ if(typeof SUPABASE_READY==='undefined'||!SUPABASE_READY){ e.preventDefault(); $('#recMsg').textContent='This form isn’t connected yet. Please use the contact page.'; } });
+
+  // ----- bio modal tabs
+  d.addEventListener('click',function(e){
+    var b=e.target.closest('[data-bt]'); if(!b) return; var m=b.closest('.bio-modal'), k=b.getAttribute('data-bt');
+    $$('[data-bt]',m).forEach(function(x){ x.classList.toggle('on',x===b); });
+    $$('[data-bp]',m).forEach(function(p){ p.hidden=p.getAttribute('data-bp')!==k; });
+    var body=$('.bio-body',m); if(body) body.scrollTop=0;
+  });
+  // ----- switchable Contact / Rate section
+  function pick(k,scroll){
+    var w=$('.switch-wrap'); if(!w) return; var pane=$('[data-pane="'+k+'"]',w); if(!pane) return;
+    $$('[data-tab]',w).forEach(function(x){ x.classList.toggle('on',x.getAttribute('data-tab')===k); x.setAttribute('aria-selected',String(x.getAttribute('data-tab')===k)); });
+    $$('.switch-pane',w).forEach(function(p){ p.hidden=p!==pane; });
+    $$('[data-reveal],[data-reveal-stagger]',pane).forEach(function(x){ x.classList.add('in-view'); });
+    pane.classList.remove('pane-in'); void pane.offsetWidth; pane.classList.add('pane-in');
+    if(scroll) w.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  d.addEventListener('click',function(e){ var b=e.target.closest('[data-tab]'); if(b){ pick(b.getAttribute('data-tab'),false); } });
+  function fromHash(){ var h=(location.hash||'').slice(1); if(h==='contact'||h==='rate-us') pick(h,true); }
+  w.addEventListener('hashchange',fromHash); if($('.switch-wrap')) setTimeout(fromHash,50);
 })();
