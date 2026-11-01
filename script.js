@@ -17,9 +17,9 @@
 //    this file) in the Supabase SQL Editor, then copy these two values from
 //    Project Settings -> API.
 
-var FORMSPREE_READY = FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') === -1;
-var SUPABASE_READY = SUPABASE_URL.indexOf('YOUR_PROJECT') === -1 &&
-                      SUPABASE_ANON_KEY.indexOf('YOUR_ANON_PUBLIC_KEY') === -1;
+var FORMSPREE_READY = typeof FORMSPREE_ENDPOINT !== 'undefined' && FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') === -1;
+var SUPABASE_READY = typeof SUPABASE_URL !== 'undefined' && typeof SUPABASE_ANON_KEY !== 'undefined' &&
+                      SUPABASE_URL.indexOf('YOUR_PROJECT') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR_ANON_PUBLIC_KEY') === -1;
 
 // Sends an email via Formspree. Resolves { ok, skipped } — skipped is true
 // when FORMSPREE_ENDPOINT hasn't been configured yet, so callers can fall
@@ -204,18 +204,7 @@ function mailtoFallback(subject, bodyText){
     });
   })();
 
-// ---------- Mobile nav toggle ----------
-(function(){
-  var toggle = document.getElementById('navToggle');
-  var links = document.getElementById('navLinks');
-  if(!toggle || !links) return;
-  toggle.addEventListener('click', function(){
-    links.classList.toggle('open');
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ links.classList.remove('open'); });
-  });
-})();
+// Mobile nav toggle now lives in fx.js
 
 // ---------- Project category filter (projects page) ----------
 (function(){

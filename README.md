@@ -26,6 +26,10 @@ Cross-platform posting: this site cannot hold your social network API keys safel
 ## Dashboard analytics & automation
 Run `supabase-dashboard.sql` once (after the other three SQL files). It adds activity log, page-view tracking, tasks, reminders and event handlers. Enable the **pg_cron** extension in Supabase (Database > Extensions) so due reminders and overdue tasks are pushed to your webhooks every 5 minutes (`reminder.due`, `task.due`).
 
+## Credentials, recommendations & CV
+Run `supabase-pages.sql` once (after the other SQL files). Add entries under **Admin > Credentials**; approve visitor comments under **Admin > Recommendations**.
+CV: `assets/cv.pdf` is a placeholder. Upload your real CV in Admin > Media and put its URL in Site settings as `cv_url` (or just replace `assets/cv.pdf`).
+
 ## Make the forms work
 Edit `config.js`:
 - `FORMSPREE_ENDPOINT`: create a form at https://formspree.io and paste its endpoint.

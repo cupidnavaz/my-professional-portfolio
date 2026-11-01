@@ -38,6 +38,7 @@
       var cnt=$('.category-head span',b); if(cnt) cnt.textContent=mine.length+' project'+(mine.length===1?'':'s');
       b.style.display=mine.length?'':'none';
     });
+    if(window.fxScan) window.fxScan();
   });
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('[data-cms-project]');
@@ -104,5 +105,28 @@
       if(p.key==='custom_css'){ var st=document.createElement('style'); st.textContent=v; document.head.appendChild(st); }
       if(p.key==='custom_js') js(null,v);
     });
+  });
+
+  // ----- CV link, credentials, recommendations
+  fetchRecords('settings','?select=*&key=eq.cv_url').then(function(r){ if(r[0]&&r[0].value) window.CV_URL=r[0].value; });
+  var cg=$$('[data-cred]'), pv=$('#credPreview');
+  if(cg.length||pv) fetchRecords('credentials','?select=*&published=eq.true&order=sort.asc').then(function(rows){
+    var card=function(c){ return '<article class="cred-card" data-t="'+esc(c.type)+'"><div class="cred-top"><span class="cred-ic">'+(c.image_url?'<img src="'+esc(c.image_url)+'" alt="">':esc(c.icon||(c.type==='certification'?'🏅':'🎓')))+'</span><span class="cred-badge">'+(c.type==='certification'?'Certification':'Qualification')+'</span></div><h3>'+esc(c.title)+'</h3><p class="cred-issuer">'+esc(c.issuer)+(c.year?' · <b>'+esc(c.year)+'</b>':'')+'</p>'+(c.description?'<p class="cred-desc">'+esc(c.description)+'</p>':'')+(/^https?:\/\//.test(c.credential_url||'')?'<a class="cred-link" target="_blank" rel="noopener" href="'+esc(c.credential_url)+'">View credential ↗</a>':'')+'</article>'; };
+    cg.forEach(function(g){ var mine=rows.filter(function(x){return x.type===g.getAttribute('data-cred');}); g.innerHTML=mine.map(card).join('')||'<p class="muted-note">Nothing added yet.</p>'; });
+    if(pv) pv.innerHTML=rows.slice(0,4).map(card).join('')||'<p class="muted-note">Credentials will appear here soon.</p>';
+    if(window.fxScan) window.fxScan();
+  });
+  var rl=$('#recList');
+  if(rl) fetchRecords('recommendations','?select=*&approved=eq.true&order=created_at.desc&limit=30').then(function(rows){
+    rl.innerHTML=rows.length?rows.map(function(r){ return '<blockquote class="rec-card"><p>“'+esc(r.message)+'”</p><footer><b>'+esc(r.name)+'</b>'+(r.role?' · '+esc(r.role):'')+(r.rating?' <span class="stars">'+'★'.repeat(Math.min(5,r.rating))+'</span>':'')+'</footer></blockquote>'; }).join(''):'<p class="muted-note">Be the first to leave a recommendation.</p>';
+    if(window.fxScan) window.fxScan();
+  });
+  var rf=$('#recForm');
+  if(rf) rf.addEventListener('submit',function(e){
+    e.preventDefault(); var f=rf.elements, m=$('#recMsg'), b=rf.querySelector('button[type=submit]'); if(f.website.value) return; b.disabled=true; m.textContent='Sending…';
+    fetch(SUPABASE_URL+'/rest/v1/recommendations',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({name:f.name.value.trim().slice(0,80),role:f.role.value.trim().slice(0,80)||null,rating:+f.rating.value||null,message:f.message.value.trim().slice(0,2000)})})
+    .then(function(r){ if(!r.ok) throw 0; rf.reset(); m.textContent='Thank you! Your recommendation will appear once it has been reviewed.'; })
+    .catch(function(){ m.textContent='Could not send right now. Please try again later.'; }).then(function(){ b.disabled=false; });
   });
 })();

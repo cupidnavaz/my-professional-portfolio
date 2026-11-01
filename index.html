@@ -23,6 +23,7 @@
       <li><a href="ventures.html">Ventures</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="credentials.html">Credentials</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li class="admin-only" hidden><a href="admin/dashboard.html">Dashboard</a></li>
@@ -280,6 +281,138 @@
 
 <!-- ============ CLIENTS & TESTIMONIALS ============ -->
 
+<section id="testimonials" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What Clients Say</p>
+      <h2>Feedback from the work</h2>
+    </div>
+    <!-- EDIT ME: swap in real testimonials -->
+    <div class="testi-grid" data-reveal-stagger>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">Cut our reporting time dramatically and the dashboard just made sense to everyone on the team from day one.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">SM</div>
+          <div><b>Sara Mensah</b><span>Ops Lead, Northstar</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">Rare to find someone who can design the interface and then actually ship the code themselves.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">DK</div>
+          <div><b>David Kim</b><span>Founder, Loomwell</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="filled">★★★★★</span></div>
+        <span class="quote-mark">"</span>
+        <p class="quote">The brand system held up perfectly as we scaled from 3 people to 30. Still using it today.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">RA</div>
+          <div><b>Renata Alvez</b><span>CEO, Aperture</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RATE US & TESTIMONIAL ============ -->
+<section id="rate-us">
+  <div class="wrap contact-grid">
+    <div class="contact-info" data-reveal>
+      <p class="eyebrow">Rate My Work</p>
+      <h2>How did I do?</h2>
+      <p>Worked with me on a project? I'd love to hear how it went — your rating and testimonial help other clients know what to expect.</p>
+      <div class="stat-row" style="margin-top:28px; padding-top:0; border-top:none;">
+        <!-- EDIT ME: swap in your real aggregate numbers once you have reviews coming in -->
+        <div class="stat"><b>4.9★</b><span>Average rating</span></div>
+        <div class="stat"><b>12+</b><span>Client reviews</span></div>
+      </div>
+    </div>
+    <div data-reveal>
+      <form id="rateForm">
+        <div class="rate-stars" id="rateStars">
+          <button type="button" class="rate-star" data-value="1" aria-label="1 star">★</button>
+          <button type="button" class="rate-star" data-value="2" aria-label="2 stars">★</button>
+          <button type="button" class="rate-star" data-value="3" aria-label="3 stars">★</button>
+          <button type="button" class="rate-star" data-value="4" aria-label="4 stars">★</button>
+          <button type="button" class="rate-star" data-value="5" aria-label="5 stars">★</button>
+        </div>
+        <p class="form-note" id="rateHint" style="margin-bottom:18px;">Tap a star to rate your experience.</p>
+        <div class="field">
+          <label for="rateName">Your name</label>
+          <input id="rateName" type="text" placeholder="Jordan Lee" required>
+        </div>
+        <div class="field">
+          <label for="rateRole">Role / Company (optional)</label>
+          <input id="rateRole" type="text" placeholder="Founder, Acme Co.">
+        </div>
+        <div class="field">
+          <label for="rateMsg">Your testimonial</label>
+          <textarea id="rateMsg" placeholder="Tell others what it was like working together..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit review</button>
+        <p class="form-note" style="margin-top:10px;">Opens your email app with your review pre-filled — hit send and it goes straight to me.</p>
+      </form>
+
+      <div class="rate-success" id="rateSuccess">
+        <div class="check">✓</div>
+        <h3>Thank you!</h3>
+        <p class="book-sub" id="rateStatus">Your review means a lot — I'll get it added to the site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+
+
+<section id="contact" class="section-alt">
+  <div class="wrap contact-grid">
+    <div class="contact-info" data-reveal>
+      <p class="eyebrow">Contact</p>
+      <h2>Let's connect &amp; collaborate</h2>
+      <p>Have a project in mind, or just want to talk through an idea? Send a note — I read every message myself.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Twitter / X">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Instagram">◎</a>
+      </div>
+      <p style="margin-top:22px; font-size:13.5px; color:var(--ink-dim);">
+        For business or agency inquiries, reach CupidCreativeX Ventures directly:<br>
+        <a href="mailto:info@cupidcreativex.com" style="color:var(--orange);">info@cupidcreativex.com</a> ·
+        <a href="tel:0707988777" style="color:var(--orange);">0707988777</a>
+      </p>
+      <!-- EDIT ME: point this at your actual media kit / one-pager PDF -->
+      <p style="margin-top:14px;">
+        <a href="#" class="project-link">📄 Download media kit (PDF) →</a>
+      </p>
+    </div>
+    <form data-reveal id="contactForm">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" type="text" placeholder="Jordan Lee" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="jordan@company.com" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me a bit about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="contactSubmitBtn" style="align-self:flex-start;">Send message</button>
+      <p class="form-note" id="contactStatus">Sent straight to Uchenna — you'll see a delivery confirmation here once it's through.</p>
+    </form>
+  </div>
+</section>
+
+
+
 <footer>
   <div class="wrap">
     <p>© 2026 Uchenna Godswill · Founder, CupidCreativeX Ventures. Built with intent, not templates.</p>
@@ -513,6 +646,7 @@ If you’re looking for a data analyst who blends technical expertise with strat
   </div>
 </div>
 
+<script src="fx.js"></script>
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script src="cms.js"></script>
