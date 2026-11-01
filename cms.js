@@ -53,4 +53,53 @@
       return '<div class="card in-view"><div class="card-ic ic-'+esc(s.color)+'">'+esc(s.icon)+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.description)+'</p></div>';
     }).join('');
   });
+
+  // ----- appearance, social links, plugins (managed in Admin -> Appearance / Plugins)
+  var hex=/^#[0-9a-f]{3,8}$/i, fontOk=/^[\w ]{2,40}$/;
+  function applyTheme(s){
+    var v={}, css='', fonts=[];
+    if(s.theme_mode==='light') v={'--bg':'#f6f7fb','--bg-alt':'#eceef6','--bg-card':'#ffffff','--line':'rgba(20,30,70,.14)','--ink':'#1a2040','--ink-dim':'#5a6385','--ink-glow':'#141a3a'};
+    if(hex.test(s.color_accent||'')) v['--orange']=s.color_accent;
+    if(hex.test(s.color_blue||'')) v['--blue']=s.color_blue;
+    if(hex.test(s.color_violet||'')) v['--violet']=s.color_violet;
+    if(hex.test(s.color_bg||'')){ v['--bg']=s.color_bg; v['--bg-alt']=s.color_bg; }
+    if(hex.test(s.color_text||'')){ v['--ink-glow']=s.color_text; v['--ink']=s.color_text; }
+    css=':root{'+Object.keys(v).map(function(n){return n+':'+v[n]+';';}).join('')+'}';
+    if(s.theme_mode==='light'||s.color_text) css+='h1,h2,h3{color:var(--ink-glow)!important}';
+    if(s.theme_mode==='light') css+='header{background:rgba(255,255,255,.85)!important}';
+    if(fontOk.test(s.font_heading||'')){ fonts.push(s.font_heading); css+="h1,h2,h3,.display,.brand{font-family:'"+s.font_heading+"',sans-serif!important}"; }
+    if(fontOk.test(s.font_body||'')){ fonts.push(s.font_body); css+="body{font-family:'"+s.font_body+"',system-ui,sans-serif!important}"; }
+    return {css:css,fonts:fonts};
+  }
+  function paint(t){
+    var st=document.getElementById('cms-theme')||document.head.appendChild(Object.assign(document.createElement('style'),{id:'cms-theme'})); st.textContent=t.css;
+    t.fonts.forEach(function(f){ var id='cms-font-'+f.replace(/\W/g,''); if(document.getElementById(id)) return;
+      var l=document.createElement('link'); l.id=id; l.rel='stylesheet'; l.href='https://fonts.googleapis.com/css2?family='+f.replace(/ /g,'+')+':wght@400;500;600;700&display=swap'; document.head.appendChild(l); });
+  }
+  try{ var cached=JSON.parse(localStorage.getItem('cms_theme')||'null'); if(cached) paint(cached); }catch(e){}
+  fetchRecords('settings','?select=*').then(function(rows){
+    var s={}; rows.forEach(function(r){ s[r.key]=r.value; });
+    var t=applyTheme(s); paint(t); try{ localStorage.setItem('cms_theme',JSON.stringify(t)); }catch(e){}
+    var ic={x:'𝕏',linkedin:'in',instagram:'◎',facebook:'f',youtube:'▶',github:'⌥',tiktok:'♪',whatsapp:'✆',telegram:'✈'}, nm={x:'X',linkedin:'LinkedIn',instagram:'Instagram',facebook:'Facebook',youtube:'YouTube',github:'GitHub',tiktok:'TikTok',whatsapp:'WhatsApp',telegram:'Telegram'}, html='';
+    Object.keys(ic).forEach(function(n){
+      var v=(s['social_'+n]||'').trim(); if(!v) return;
+      if(n==='whatsapp'&&/^\+?\d+$/.test(v)) v='https://wa.me/'+v.replace('+','');
+      if(n==='telegram'&&/^@?\w+$/.test(v)) v='https://t.me/'+v.replace('@','');
+      if(!/^https?:\/\//i.test(v)) return;
+      html+='<a href="'+esc(v)+'" target="_blank" rel="noopener" aria-label="'+nm[n]+'">'+ic[n]+'</a>';
+    });
+    if(html){ $$('.social-row').forEach(function(r){ r.innerHTML=html; });
+      var fw=$('footer .wrap'); if(fw&&!$('footer .social-row')){ var d=document.createElement('div'); d.className='social-row'; d.style.marginTop='12px'; d.innerHTML=html; fw.appendChild(d); } }
+  });
+  fetchRecords('plugins','?select=*&enabled=eq.true').then(function(rows){
+    rows.forEach(function(p){
+      var v=(p.config||'').trim(); if(!v) return;
+      function js(src,code){ var s=document.createElement('script'); if(src){ s.async=true; s.src=src; } else s.textContent=code; document.head.appendChild(s); }
+      if(p.key==='google_analytics'&&/^[\w-]+$/.test(v)){ js('https://www.googletagmanager.com/gtag/js?id='+v); js(null,"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','"+v+"');"); }
+      if(p.key==='meta_pixel'&&/^\d+$/.test(v)) js(null,"!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','"+v+"');fbq('track','PageView');");
+      if(p.key==='tawk_to'&&/^[\w]+\/[\w]+$/.test(v)) js('https://embed.tawk.to/'+v);
+      if(p.key==='custom_css'){ var st=document.createElement('style'); st.textContent=v; document.head.appendChild(st); }
+      if(p.key==='custom_js') js(null,v);
+    });
+  });
 })();
