@@ -23,6 +23,9 @@ Security note: the real protection is the database rules in `supabase-admin.sql`
 Run `supabase-features.sql` once in the Supabase SQL Editor (after the two earlier files). It adds Plugins, Webhooks, Social posts and the Media bucket. Then in the dashboard: **Appearance** (theme, colors, fonts, social links), **Media**, **Plugins**, **Webhooks**, **Social posts**.
 Cross-platform posting: this site cannot hold your social network API keys safely, so a queued post is sent as a `post.publish` webhook to Zapier / Make / n8n, which publishes it to each platform.
 
+## Dashboard analytics & automation
+Run `supabase-dashboard.sql` once (after the other three SQL files). It adds activity log, page-view tracking, tasks, reminders and event handlers. Enable the **pg_cron** extension in Supabase (Database > Extensions) so due reminders and overdue tasks are pushed to your webhooks every 5 minutes (`reminder.due`, `task.due`).
+
 ## Make the forms work
 Edit `config.js`:
 - `FORMSPREE_ENDPOINT`: create a form at https://formspree.io and paste its endpoint.

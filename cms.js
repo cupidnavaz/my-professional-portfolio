@@ -5,6 +5,9 @@
     if(s && s.expires_at*1000>Date.now()) document.querySelectorAll('.admin-only').forEach(function(e){ e.hidden=false; });
   }catch(e){}
   if(typeof SUPABASE_READY==='undefined' || !SUPABASE_READY) return;
+  try{ var pg=location.pathname.split('/').pop()||'index.html', sk='pv_'+pg;
+    if(!sessionStorage.getItem(sk) && !document.querySelector('.admin-only:not([hidden])')){ sessionStorage.setItem(sk,1);
+      fetch(SUPABASE_URL+'/rest/v1/page_views',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({path:pg.slice(0,100),referrer:(document.referrer||'').slice(0,190)})}).catch(function(){}); } }catch(e){}
   var esc=function(t){ return String(t==null?'':t).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
   var $=function(s,r){ return (r||document).querySelector(s); }, $$=function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
   var qs='?select=*&published=eq.true&order=sort.asc';
