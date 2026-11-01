@@ -1044,10 +1044,8 @@
 .nav-links a.active{ color:var(--orange); }
 .pg-hero{ position:relative; overflow:hidden; padding:88px 0 60px; border-bottom:1px solid var(--line);
   background:linear-gradient(180deg,rgba(76,127,255,.07),transparent 70%); }
-.pg-hero::before{ content:""; position:absolute; right:-120px; top:-200px; width:520px; height:520px; border-radius:50%;
-  background:radial-gradient(circle,rgba(245,130,31,.22),transparent 65%); pointer-events:none; }
-.pg-hero::after{ content:""; position:absolute; left:-160px; bottom:-260px; width:480px; height:480px; border-radius:50%;
-  background:radial-gradient(circle,rgba(139,95,232,.2),transparent 65%); pointer-events:none; }
+.pg-hero::before{ content:""; position:absolute; left:50%; top:-180px; transform:translateX(-50%); width:min(860px,100%); height:380px;
+  background:radial-gradient(ellipse at center,rgba(245,130,31,.2),rgba(139,95,232,.12) 45%,transparent 70%); pointer-events:none; }
 .pg-hero .wrap{ position:relative; z-index:1; }
 .pg-hero .breadcrumb{ font-size:13px; color:var(--ink-dim); margin-bottom:18px; }
 .pg-hero .breadcrumb a{ color:var(--ink-dim); }
@@ -1069,3 +1067,14 @@ body.sub .pg-hero{ padding:88px 0 60px; }
 @media(max-width:640px){ .pg-hero{ padding:64px 0 44px; } .pg-cta .wrap{ padding:26px 22px; } }
 
 .admin-only[hidden]{ display:none !important; }
+
+/* ---- balanced layout fixes ---- */
+.pg-hero .wrap{ text-align:center; }
+.pg-hero .lead{ margin-left:auto; margin-right:auto; }
+.section-head{ margin-left:auto; margin-right:auto; text-align:center; }
+.section-head h2::after{ margin-left:auto; margin-right:auto; }
+.pg-cta .wrap{ width:calc(100% - 48px); max-width:calc(var(--maxw) - 48px); padding:36px 40px; margin:24px auto 72px; }
+footer .wrap{ flex-direction:column; justify-content:center; text-align:center; }
+footer .social-row{ justify-content:center; }
+@media (max-width:1100px){ .nav-links{ gap:14px; } .nav-links a{ font-size:13.5px; } .nav-cta .btn{ padding:9px 16px; } }
+@media (max-width:640px){ .pg-cta .wrap{ width:calc(100% - 32px); padding:26px 22px; text-align:center; justify-content:center; } }
