@@ -200,10 +200,10 @@ function shareBtns(r){
   var t=encodeURIComponent(r.content||''), u=encodeURIComponent(r.link_url||location.origin.replace(/\/admin.*/,'')), L=function(n,h){return '<a class="btn ghost sm" target="_blank" rel="noopener" href="'+h+'">'+n+'</a>';};
   return L('X','https://twitter.com/intent/tweet?text='+t+'&url='+u)+L('FB','https://www.facebook.com/sharer/sharer.php?u='+u)+L('in','https://www.linkedin.com/sharing/share-offsite/?url='+u)+L('WA','https://wa.me/?text='+t+'%20'+u)+L('TG','https://t.me/share/url?url='+u+'&text='+t);
 }
-var FONTS=['Inter','Space Grotesk','Poppins','Montserrat','Playfair Display','Lora','Roboto','Open Sans','DM Sans','Raleway','Merriweather','Manrope','Sora','Nunito'];
+var FONTS=['Inter','Space Grotesk','Poppins','Montserrat','Playfair Display','Lora','Roboto','Open Sans','DM Sans','Raleway','Merriweather','Manrope','Sora','Nunito','Alice','Lato','Oswald','Rubik','Work Sans','Josefin Sans','Quicksand','Cormorant Garamond','Libre Baskerville','Bebas Neue','Pacifico'];
 var SOC=['x','linkedin','instagram','facebook','youtube','github','tiktok','whatsapp','telegram'];
 var COLS=[['color_accent','Accent (buttons, highlights)','#f5821f'],['color_blue','Gradient blue','#4c7fff'],['color_violet','Gradient violet','#8b5fe8'],['color_bg','Page background','#0a0e27'],['color_text','Text','#ffffff']];
-var MC=[['text','Body text','#ffffff','#141a3a'],['heading','Headings','#ffffff','#141a3a'],['nav','Nav links','#9ba7d1','#3a4470'],['nav_hover','Nav hover / active','#f5821f','#d96a0b'],['footer','Footer text & links','#9ba7d1','#3a4470'],['link_hover','Link hover','#f5821f','#d96a0b']];
+var MC=[['site_title','Site title (header)','#ffffff','#141a3a'],['text','Body text','#ffffff','#141a3a'],['heading','Headings','#ffffff','#141a3a'],['nav','Nav links','#9ba7d1','#3a4470'],['nav_hover','Nav hover / active','#f5821f','#d96a0b'],['footer','Footer text & links','#9ba7d1','#3a4470'],['link_hover','Link hover','#f5821f','#d96a0b']];
 function cpk(k,def,s){ return '<span class="cp"><input type="color" name="'+k+'" value="'+(s[k]||def)+'"><input type="checkbox" name="use_'+k+'"'+(s[k]?' checked':'')+' title="Use custom color"></span>'; }
 function sel(k,l,o,s){ return '<label>'+l+'<select name="'+k+'">'+o.map(function(x){return '<option value="'+x[0]+'"'+((s[k]||'')===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label>'; }
 function newSecs(s){
@@ -217,6 +217,19 @@ function newSecs(s){
   '<div class="sec"><h3>Logo &amp; theme switch</h3>'+sel('logo_shape','Logo corners',[['','Rounded (default)'],['circle','Circle'],['square','Square']],s)+
    '<label>Logo border color'+cpk('logo_border','#f5821f',s)+'</label>'+sel('theme_toggle','Light / dark switch for visitors',[['','Hidden'],['on','Show in header']],s)+'</div>';
 }
+function moreSecs(s){
+  var ta=function(k,l,ph,rows){ return '<label>'+l+'<textarea name="'+k+'" rows="'+(rows||3)+'" placeholder="'+ph+'">'+esc(s[k]||'')+'</textarea></label>'; };
+  return '<div class="sec"><h3>Footer</h3><p class="muted">Edit the two footer lines and add links. Colors are under Text &amp; link colors.</p>'+
+    ta('footer_text','Footer line 1','© 2026 Your Name · Your tagline',2)+ta('footer_tagline','Footer line 2','Data · Design · Development',2)+
+    ta('footer_links','Footer links (one per line: Label | URL)','Privacy | privacy.html&#10;Instagram | https://instagram.com/you&#10;Email | mailto:you@example.com',4)+'</div>'+
+  '<div class="sec"><h3>Hero section</h3><label>Hero intro text<textarea name="hero_lead" rows="3">'+esc(s.hero_lead||'')+'</textarea></label>'+
+    '<label>Center image of the spinning rings<input name="hero_image" value="'+esc(s.hero_image||'')+'" placeholder="Image URL, or upload below"><span class="up-row"><input type="file" accept="image/*" data-up="hero_image"></span></label>'+
+    sel('spin_speed','Ring spin speed',[['','Normal'],['slow','Slow'],['fast','Fast'],['off','Stopped']],s)+'</div>'+
+  '<div class="sec"><h3>Resume / CV</h3><p class="muted">Upload a PDF. It powers the “Preview CV” and “Download PDF” buttons on the About page and bio card.</p>'+
+    '<label>CV link<input name="cv_url" value="'+esc(s.cv_url||'')+'" placeholder="Upload a PDF below or paste a link"><span class="up-row"><input type="file" accept="application/pdf" data-up="cv_url"></span></label>'+
+    (s.cv_url?'<a class="btn ghost sm" href="'+esc(s.cv_url)+'" target="_blank" rel="noopener" style="justify-self:start">Open current CV ↗</a>':'')+'</div>';
+}
+function morePuts(f,put){ ['footer_text','footer_tagline','footer_links','hero_lead','hero_image','spin_speed','cv_url'].forEach(function(k){ put(k,f[k].value.trim()); }); }
 function newPuts(f,put){
   MC.forEach(function(m){ ['dk_','lt_'].forEach(function(p){ var k=p+m[0]; put(k,f['use_'+k].checked?f[k].value:''); }); });
   ['anim_enabled','anim_hover','anim_tilt','anim_speed','anim_reveal','anim_button','logo_shape','theme_toggle'].forEach(function(k){ put(k,f[k].value); });
@@ -236,7 +249,7 @@ async function appearance(){
    '<div class="sec"><h3>Colors</h3><p class="muted">Tick “use” to override a color; untick to go back to the default.</p>'+COLS.map(function(c){return '<label>'+c[1]+'<span class="cp"><input type="color" name="'+c[0]+'" value="'+(s[c[0]]||c[2])+'"><input type="checkbox" name="use_'+c[0]+'"'+(s[c[0]]?' checked':'')+'> use</span></label>';}).join('')+'</div>'+
    '<div class="sec"><h3>Fonts</h3>'+fsel('font_heading','Headings')+fsel('font_body','Body text')+'</div>'+
    '<div class="sec"><h3>Social links</h3><p class="muted">Full https:// links (WhatsApp: number with country code; Telegram: username). Empty = hidden.</p>'+SOC.map(function(k){return '<label>'+k+'<input name="social_'+k+'" value="'+esc(s['social_'+k]||'')+'"></label>';}).join('')+'</div>'+
-   newSecs(s)+'<div class="foot" style="justify-content:flex-start"><button class="btn">Save appearance</button><a class="btn ghost" href="../index.html" target="_blank">Preview site ↗</a></div></form>';
+   newSecs(s)+moreSecs(s)+'<div class="foot" style="justify-content:flex-start"><button class="btn">Save appearance</button><a class="btn ghost" href="../index.html" target="_blank">Preview site ↗</a></div></form>';
   wireUploads($('#ap'));
   $('#ap').onsubmit=async function(e){
     e.preventDefault(); var f=e.target.elements, up=[], del=[];
@@ -244,7 +257,7 @@ async function appearance(){
     put('theme_mode',f.theme_mode.value); ['site_name','brand_display','site_logo','site_favicon'].forEach(function(k){ put(k,f[k].value.trim()); });
     COLS.forEach(function(c){ put(c[0],f['use_'+c[0]].checked?f[c[0]].value:''); });
     put('font_heading',f.font_heading.value); put('font_body',f.font_body.value);
-    SOC.forEach(function(k){ put('social_'+k,f['social_'+k].value.trim()); }); newPuts(f,put);
+    SOC.forEach(function(k){ put('social_'+k,f['social_'+k].value.trim()); }); newPuts(f,put); morePuts(f,put);
     var a=up.length?await sb.from('settings').upsert(up):{}; var b=del.length?await sb.from('settings').delete().in('key',del):{};
     if(a.error||b.error){ toast((a.error||b.error).message); return; } toast('Saved. Refresh the site to see it.');
   };

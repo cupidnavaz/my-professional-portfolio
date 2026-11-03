@@ -60,7 +60,7 @@
   });
 
   // ----- appearance, social links, plugins (managed in Admin -> Appearance / Plugins)
-  var hex=/^#[0-9a-f]{3,8}$/i, fontOk=/^[\w ]{2,40}$/;
+  var hex=/^#[0-9a-f]{3,8}$/i, fontOk=/^[\w ]{2,40}$/, SERIF=['Alice','Playfair Display','Lora','Merriweather','Cormorant Garamond','Libre Baskerville'], SINGLE=['Alice','Bebas Neue','Pacifico'];
   function applyTheme(s){
     var mode=(s.theme_toggle==='on'&&localStorage.getItem('site_mode'))||s.theme_mode||'dark', P=mode==='light'?'lt_':'dk_', v={}, css='', fonts=[];
     var g=function(k){ return hex.test(s[k]||'')?s[k]:''; };
@@ -75,6 +75,8 @@
     var hd=g(P+'heading');
     css+=hd?'h1,h2,h3,h4,.display{color:'+hd+'!important}':((mode==='light'||tx)?'h1,h2,h3{color:var(--ink-glow)!important}':'');
     if(mode==='light') css+='header{background:rgba(255,255,255,.85)!important}';
+    var stc=g(P+'site_title'); if(stc) css+='.logo,#siteName{color:'+stc+'!important}';
+    var sp=s.spin_speed||''; if(sp==='off') css+='.ring-1,.ring-2,.orbit-spin,.orbit-node{animation:none!important}'; if(sp==='slow') css+='.ring-1{animation-duration:52s!important}.ring-2{animation-duration:80s!important}'; if(sp==='fast') css+='.ring-1{animation-duration:12s!important}.ring-2{animation-duration:20s!important}';
     var lh=g(P+'link_hover'); if(lh) css+='a:not(.btn):hover{color:'+lh+'}';
     var nv=g(P+'nav'); if(nv) css+='.nav-links a{color:'+nv+'!important}';
     var nh=g(P+'nav_hover'); if(nh) css+='.nav-links a:hover,.nav-links a.active{color:'+nh+'!important}';
@@ -94,8 +96,8 @@
     if(s.logo_shape==='circle') css+='#siteLogo{border-radius:50%!important;aspect-ratio:1;width:auto;object-fit:cover}';
     if(s.logo_shape==='square') css+='#siteLogo{border-radius:2px!important}';
     if(g('logo_border')) css+='#siteLogo{border:2px solid '+g('logo_border')+'}';
-    if(fontOk.test(s.font_heading||'')){ fonts.push(s.font_heading); css+="h1,h2,h3,.display,.brand{font-family:'"+s.font_heading+"',sans-serif!important}"; }
-    if(fontOk.test(s.font_body||'')){ fonts.push(s.font_body); css+="body{font-family:'"+s.font_body+"',system-ui,sans-serif!important}"; }
+    if(fontOk.test(s.font_heading||'')){ fonts.push(s.font_heading); css+="h1,h2,h3,.display,.brand{font-family:'"+s.font_heading+"',"+(SERIF.indexOf(s.font_heading)>-1?'serif':'sans-serif')+"!important}"; }
+    if(fontOk.test(s.font_body||'')){ fonts.push(s.font_body); css+="body{font-family:'"+s.font_body+"',"+(SERIF.indexOf(s.font_body)>-1?'serif':'system-ui,sans-serif')+"!important}"; }
     return {css:css,fonts:fonts,notilt:(an!==''||s.anim_tilt==='off'||s.anim_enabled==='off')};
   }
   function themeBtn(){
@@ -110,7 +112,7 @@
   function paint(t){
     var st=document.getElementById('cms-theme')||document.head.appendChild(Object.assign(document.createElement('style'),{id:'cms-theme'})); st.textContent=t.css; document.body.classList.toggle('no-tilt',!!t.notilt);
     t.fonts.forEach(function(f){ var id='cms-font-'+f.replace(/\W/g,''); if(document.getElementById(id)) return;
-      var l=document.createElement('link'); l.id=id; l.rel='stylesheet'; l.href='https://fonts.googleapis.com/css2?family='+f.replace(/ /g,'+')+':wght@400;500;600;700&display=swap'; document.head.appendChild(l); });
+      var l=document.createElement('link'); l.id=id; l.rel='stylesheet'; l.href='https://fonts.googleapis.com/css2?family='+f.replace(/ /g,'+')+(SINGLE.indexOf(f)>-1?'':':wght@400;700')+'&display=swap'; document.head.appendChild(l); });
   }
   try{ var cached=JSON.parse(localStorage.getItem('cms_theme')||'null'); if(cached) paint(cached); }catch(e){}
   fetchRecords('settings','?select=*').then(function(rows){
@@ -172,5 +174,20 @@
     if(nm) nm.hidden=s.brand_display==='logo'; if(img) img.hidden=s.brand_display==='name';
     if(s.site_favicon&&safe(s.site_favicon)){ var l=document.querySelector('link[rel~="icon"]')||document.head.appendChild(Object.assign(document.createElement('link'),{rel:'icon'}));
       l.removeAttribute('type'); l.href=s.site_favicon; var a=document.querySelector('link[rel="apple-touch-icon"]')||document.head.appendChild(Object.assign(document.createElement('link'),{rel:'apple-touch-icon'})); a.href=s.site_favicon; }
+  });
+
+  // ----- footer links, hero image, resume (Admin > Appearance)
+  fetchRecords('settings','?select=*&key=in.(footer_links,hero_image,cv_url)').then(function(rows){
+    var s={}; rows.forEach(function(r){ s[r.key]=r.value; });
+    var safe=function(u){ return /^(https?:\/\/|assets\/|\/)/i.test(u||''); };
+    if(s.hero_image&&safe(s.hero_image)) $$('.orbit-core-inner img,.hero-top .avatar-inner img').forEach(function(i){ i.src=s.hero_image; i.style.objectFit='cover'; });
+    if(s.cv_url&&safe(s.cv_url)){ window.CV_URL=s.cv_url; var dl=/\/storage\/v1\/object\/public\//.test(s.cv_url)?s.cv_url+'?download=Resume.pdf':s.cv_url;
+      $$('a[href="assets/cv.pdf"]').forEach(function(a){ a.href=dl; }); }
+    var links=(s.footer_links||'').split('\n').map(function(l){ var p=l.split('|'); return p.length>1?[p[0].trim(),p.slice(1).join('|').trim()]:null; })
+      .filter(function(p){ return p&&p[0]&&/^(https?:\/\/|mailto:|tel:|#|[\w\-.\/]+\.html(#[\w-]+)?$)/i.test(p[1]); });
+    var fw=$('footer .wrap'), old=$('.footer-links'); if(old) old.remove();
+    if(fw&&links.length){ var d=document.createElement('div'); d.className='footer-links';
+      d.innerHTML=links.map(function(p){ var ext=/^https?:/i.test(p[1]); return '<a href="'+esc(p[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+esc(p[0])+'</a>'; }).join('');
+      fw.insertBefore(d,fw.querySelector('.social-row')); if(!d.parentNode) fw.appendChild(d); }
   });
 })();
