@@ -30,3 +30,6 @@ do $$ begin
 exception when undefined_function then
   raise notice 'Run supabase-dashboard.sql first to get webhook/activity alerts for new recommendations.';
 end $$;
+
+-- Services can use an image instead of an emoji icon
+alter table services add column if not exists image_url text;

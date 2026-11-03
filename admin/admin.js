@@ -16,7 +16,7 @@ var T={
   ['summary','textarea','','Shown on the project card'],['overview','textarea'],['request','textarea'],['challenge','textarea'],['solution','textarea'],['results','textarea'],
   ['tools','text','','Comma-separated'],['icon','text','','An emoji'],['image_url','text','','Optional thumbnail URL'],['featured','bool','','Show on home page (first 3 featured)'],['published','bool'],['sort','number']]},
  services:{label:'Services',order:'sort',asc:1,cols:['icon','title','published'],fields:[
-  ['title','text','req'],['description','textarea'],['icon','text','','An emoji'],['color','select',['blue','violet','magenta','teal','orange']],['includes','textarea','','Comma-separated list'],['published','bool'],['sort','number']]},
+  ['title','text','req'],['description','textarea'],['icon','text','','Emoji. Used when no image is set'],['image_url','text','','Optional image. Overrides the icon'],['color','select',['blue','violet','magenta','teal','orange']],['includes','textarea','','Comma-separated list'],['published','bool'],['sort','number']]},
  reviews:{label:'Reviews',cols:['name','rating','message','approved'],fields:[
   ['name','text','req'],['role','text'],['rating','number','req','1 to 5'],['message','textarea','req'],['approved','bool','','Untick to hide from the public site']]},
  bookings:{label:'Bookings',cols:['name','email','preferred_time','status'],fields:[
@@ -70,10 +70,10 @@ function form(row){
     var inp;
     if(ty==='textarea'||ty==='json') inp='<textarea name="'+n+'"'+rq+'>'+esc(ty==='json'&&v!=null?JSON.stringify(v):v)+'</textarea>';
     else if(ty==='select') inp='<select name="'+n+'">'+f[2].map(function(o){return '<option'+(o===v?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
-    else inp='<input name="'+n+'" type="'+(ty==='number'?'number':ty==='datetime'?'datetime-local':'text')+'" value="'+esc(v==null?'':(ty==='datetime'?dtl(v):v))+'"'+rq+((row&&n===pk)?' readonly':'')+'>';
+    else inp=(n==='image_url'?'<span class="up-row"><small class="muted">Upload an image to fill the URL automatically</small><input type="file" accept="image/*" data-up="'+n+'"></span>':'')+'<input name="'+n+'" type="'+(ty==='number'?'number':ty==='datetime'?'datetime-local':'text')+'" value="'+esc(v==null?'':(ty==='datetime'?dtl(v):v))+'"'+rq+((row&&n===pk)?' readonly':'')+'>';
     return '<label>'+n.replace(/_/g,' ')+h+inp+'</label>';
   }).join('')+'<div class="foot"><button type="button" class="btn ghost" id="x">Cancel</button><button class="btn">Save</button></div></form>';
-  md.hidden=false; $('#x').onclick=function(){md.hidden=true;};
+  md.hidden=false; $('#x').onclick=function(){md.hidden=true;}; wireUploads(md);
   md.querySelector('form').onsubmit=async function(e){
     e.preventDefault(); var fd=new FormData(e.target), o={};
     try{ c.fields.forEach(function(f){ var n=f[0],ty=f[1],v=fd.get(n);
@@ -189,6 +189,13 @@ async function pollDue(){ var r=await sb.from('reminders').select('id',{count:'e
 $('#bell').onclick=function(){ if(window.Notification&&Notification.permission==='default') Notification.requestPermission(); show('reminders'); };
 $('#burger').onclick=function(){ document.body.classList.toggle('nav-open'); }; $('#scrim').onclick=function(){ document.body.classList.remove('nav-open'); };
 pollDue(); setInterval(pollDue,60000);
+function wireUploads(root){
+  root.querySelectorAll('[data-up]').forEach(function(f){ f.onchange=async function(){
+    var file=f.files[0]; if(!file) return; toast('Uploading…');
+    var nm=Date.now()+'-'+file.name.replace(/[^\w.-]+/g,'-'), r=await sb.storage.from('media').upload(nm,file,{cacheControl:'31536000'});
+    if(r.error){ toast(r.error.message+' (run supabase-features.sql)'); return; }
+    var tgt=root.querySelector('[name="'+f.dataset.up+'"]'); tgt.value=sb.storage.from('media').getPublicUrl(nm).data.publicUrl; toast('Uploaded'); }; });
+}
 function shareBtns(r){
   var t=encodeURIComponent(r.content||''), u=encodeURIComponent(r.link_url||location.origin.replace(/\/admin.*/,'')), L=function(n,h){return '<a class="btn ghost sm" target="_blank" rel="noopener" href="'+h+'">'+n+'</a>';};
   return L('X','https://twitter.com/intent/tweet?text='+t+'&url='+u)+L('FB','https://www.facebook.com/sharer/sharer.php?u='+u)+L('in','https://www.linkedin.com/sharing/share-offsite/?url='+u)+L('WA','https://wa.me/?text='+t+'%20'+u)+L('TG','https://t.me/share/url?url='+u+'&text='+t);
@@ -201,15 +208,21 @@ async function appearance(){
   var r=await sb.from('settings').select('*'), s={}; (r.data||[]).forEach(function(x){s[x.key]=x.value;});
   var fsel=function(k,l){return '<label>'+l+'<select name="'+k+'"><option value="">Default</option>'+FONTS.map(function(f){return '<option'+(s[k]===f?' selected':'')+'>'+f+'</option>';}).join('')+'</select></label>';};
   m.innerHTML='<div class="bar"><h2>Appearance &amp; social</h2></div><form id="ap" class="form-grid">'+
+   '<div class="sec"><h3>Branding</h3><p class="muted">Logo and name appear in the header. Clicking either always returns to the homepage.</p>'+
+   '<label>Site name<input name="site_name" value="'+esc(s.site_name||'')+'" placeholder="Uchenna Godswill .U."></label>'+
+   '<label>Header shows<select name="brand_display"><option value="">Logo + name</option><option value="logo"'+(s.brand_display==='logo'?' selected':'')+'>Logo only</option><option value="name"'+(s.brand_display==='name'?' selected':'')+'>Name only</option></select></label>'+
+   '<label>Logo URL<input name="site_logo" value="'+esc(s.site_logo||'')+'" placeholder="https://… or assets/logo.png"><span class="up-row"><input type="file" accept="image/*" data-up="site_logo"></span></label>'+
+   '<label>Site icon (favicon) URL<input name="site_favicon" value="'+esc(s.site_favicon||'')+'" placeholder="Square PNG, 64x64 or larger"><span class="up-row"><input type="file" accept="image/*" data-up="site_favicon"></span></label></div>'+
    '<div class="sec"><h3>Theme</h3><label>Mode<select name="theme_mode"><option value="">Dark (default)</option><option value="light"'+(s.theme_mode==='light'?' selected':'')+'>Light</option></select></label></div>'+
    '<div class="sec"><h3>Colors</h3><p class="muted">Tick “use” to override a color; untick to go back to the default.</p>'+COLS.map(function(c){return '<label>'+c[1]+'<span class="cp"><input type="color" name="'+c[0]+'" value="'+(s[c[0]]||c[2])+'"><input type="checkbox" name="use_'+c[0]+'"'+(s[c[0]]?' checked':'')+'> use</span></label>';}).join('')+'</div>'+
    '<div class="sec"><h3>Fonts</h3>'+fsel('font_heading','Headings')+fsel('font_body','Body text')+'</div>'+
    '<div class="sec"><h3>Social links</h3><p class="muted">Full https:// links (WhatsApp: number with country code; Telegram: username). Empty = hidden.</p>'+SOC.map(function(k){return '<label>'+k+'<input name="social_'+k+'" value="'+esc(s['social_'+k]||'')+'"></label>';}).join('')+'</div>'+
    '<div class="foot" style="justify-content:flex-start"><button class="btn">Save appearance</button><a class="btn ghost" href="../index.html" target="_blank">Preview site ↗</a></div></form>';
+  wireUploads($('#ap'));
   $('#ap').onsubmit=async function(e){
     e.preventDefault(); var f=e.target.elements, up=[], del=[];
     var put=function(k,v){ v?up.push({key:k,value:v}):del.push(k); };
-    put('theme_mode',f.theme_mode.value);
+    put('theme_mode',f.theme_mode.value); ['site_name','brand_display','site_logo','site_favicon'].forEach(function(k){ put(k,f[k].value.trim()); });
     COLS.forEach(function(c){ put(c[0],f['use_'+c[0]].checked?f[c[0]].value:''); });
     put('font_heading',f.font_heading.value); put('font_body',f.font_body.value);
     SOC.forEach(function(k){ put('social_'+k,f['social_'+k].value.trim()); });

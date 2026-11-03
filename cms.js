@@ -11,6 +11,7 @@
   var esc=function(t){ return String(t==null?'':t).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
   var $=function(s,r){ return (r||document).querySelector(s); }, $$=function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
   var qs='?select=*&published=eq.true&order=sort.asc';
+  var ic=function(s){ return s.image_url?'<div class="card-ic card-img"><img src="'+esc(s.image_url)+'" alt="" loading="lazy"></div>':''+ic(s)+''; };
 
   // ----- site settings
   fetchRecords('settings','?select=*').then(function(rows){
@@ -50,11 +51,11 @@
   if(det||tea) fetchRecords('services',qs).then(function(rows){
     if(!rows.length) return;
     if(det) det.parentNode.innerHTML=rows.map(function(s){
-      return '<div class="service-detail in-view"><div class="card-ic ic-'+esc(s.color)+'">'+esc(s.icon)+'</div><div><h3>'+esc(s.title)+'</h3><p class="desc">'+esc(s.description)+'</p><div class="includes">'+
+      return '<div class="service-detail in-view">'+ic(s)+'<div><h3>'+esc(s.title)+'</h3><p class="desc">'+esc(s.description)+'</p><div class="includes">'+
         (s.includes||'').split(',').map(function(x){return x.trim();}).filter(Boolean).map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div></div></div>';
     }).join('');
     if(tea) tea.innerHTML=rows.map(function(s){
-      return '<div class="card in-view"><div class="card-ic ic-'+esc(s.color)+'">'+esc(s.icon)+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.description)+'</p></div>';
+      return '<div class="card in-view">'+ic(s)+'<h3>'+esc(s.title)+'</h3><p>'+esc(s.description)+'</p></div>';
     }).join('');
   });
 
@@ -128,5 +129,17 @@
       body:JSON.stringify({name:f.name.value.trim().slice(0,80),role:f.role.value.trim().slice(0,80)||null,rating:+f.rating.value||null,message:f.message.value.trim().slice(0,2000)})})
     .then(function(r){ if(!r.ok) throw 0; rf.reset(); m.textContent='Thank you! Your recommendation will appear once it has been reviewed.'; })
     .catch(function(){ m.textContent='Could not send right now. Please try again later.'; }).then(function(){ b.disabled=false; });
+  });
+
+  // ----- branding: logo, site name, favicon (Admin > Appearance)
+  fetchRecords('settings','?select=*&key=in.(site_name,brand_display,site_logo,site_favicon)').then(function(rows){
+    var s={}; rows.forEach(function(r){ s[r.key]=r.value; });
+    var img=$('#siteLogo'), nm=$('#siteName'), safe=function(u){ return /^(https?:\/\/|assets\/|\/)/i.test(u||''); };
+    if(s.site_logo&&safe(s.site_logo)&&img) img.src=s.site_logo;
+    if(s.site_name&&nm){ nm.textContent=s.site_name; var parts=document.title.split(' — ');
+      if(parts.length>1) document.title=(/index\.html$|\/$/.test(location.pathname)||!location.pathname.split('/').pop())?s.site_name+' — '+parts.slice(1).join(' — '):parts[0]+' — '+s.site_name; }
+    if(nm) nm.hidden=s.brand_display==='logo'; if(img) img.hidden=s.brand_display==='name';
+    if(s.site_favicon&&safe(s.site_favicon)){ var l=document.querySelector('link[rel~="icon"]')||document.head.appendChild(Object.assign(document.createElement('link'),{rel:'icon'}));
+      l.removeAttribute('type'); l.href=s.site_favicon; var a=document.querySelector('link[rel="apple-touch-icon"]')||document.head.appendChild(Object.assign(document.createElement('link'),{rel:'apple-touch-icon'})); a.href=s.site_favicon; }
   });
 })();
