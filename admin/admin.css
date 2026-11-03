@@ -20,7 +20,7 @@ nav button:hover{background:rgba(255,255,255,.05);color:#fff}nav button.on{backg
 .shell{flex:1;min-width:0}.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:12px 28px;background:rgba(8,12,34,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .top h1{font-size:20px}.sp{flex:1}.ibtn{background:var(--card);border:1px solid var(--line);color:#fff;border-radius:10px;width:40px;height:40px;cursor:pointer;font-size:17px;position:relative}
 .ibtn b{position:absolute;top:-6px;right:-6px;background:var(--red);font:700 11px Inter;border-radius:99px;padding:1px 6px}#burger{display:none}#who{font-size:13px}
-#scrim{display:none}main{padding:26px 28px 60px;max-width:1400px}
+#scrim{display:none}main{padding:26px 28px 60px;max-width:none}
 @media(max-width:900px){#burger{display:block}aside{position:fixed;left:0;top:0;transform:translateX(-100%);box-shadow:20px 0 60px rgba(0,0,0,.5)}
  body.nav-open aside{transform:none}body.nav-open #scrim{display:block;position:fixed;inset:0;background:rgba(3,6,20,.65);z-index:35}.top{padding:10px 14px}#who{display:none}main{padding:18px 14px 50px}}
 /* generic */
