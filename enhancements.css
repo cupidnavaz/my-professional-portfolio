@@ -1,0 +1,127 @@
+/* Portfolio visual enhancements: rounded avatar rings, section icons and motion. */
+
+/* Keep every profile/avatar image and frame consistently rounded. */
+.avatar-frame {
+  border-radius: 50%;
+  background-size: 220% 220%;
+  animation: avatar-ring-shift 7s ease-in-out infinite;
+  box-shadow: 0 0 36px -12px rgba(139, 95, 232, .72);
+}
+
+.avatar-inner,
+.avatar-inner img,
+.orbit-core,
+.orbit-core-inner,
+.orbit-core-inner img {
+  border-radius: 50%;
+}
+
+.avatar-inner img,
+.orbit-core-inner img {
+  object-fit: contain;
+}
+
+@keyframes avatar-ring-shift {
+  0%, 100% { background-position: 0% 50%; box-shadow: 0 0 32px -12px rgba(76, 127, 255, .65); }
+  50% { background-position: 100% 50%; box-shadow: 0 0 42px -10px rgba(225, 79, 160, .62); }
+}
+
+/* Add a small, colorful icon badge to section and page headings. */
+.section-head h2,
+.page-hero h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-head h2::before,
+.page-hero h1::before {
+  content: "✦";
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(139, 95, 232, .38);
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(76, 127, 255, .18), rgba(225, 79, 160, .18));
+  color: var(--teal);
+  font-size: 19px;
+  line-height: 1;
+  animation: section-icon-float 3.2s ease-in-out infinite;
+}
+
+section#services .section-head h2::before { content: "✧"; color: var(--blue); }
+section#process .section-head h2::before { content: "↗"; color: var(--teal); }
+section#projects .section-head h2::before { content: "▣"; color: var(--violet); }
+section#testimonials .section-head h2::before { content: "❝"; color: var(--magenta); }
+section#connect .section-head h2::before { content: "✉"; color: var(--orange); }
+
+@keyframes section-icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Add a gentle reveal and interaction lift to key content blocks. */
+.section-head {
+  animation: section-heading-enter .65s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@keyframes section-heading-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card,
+.project-card,
+.testi-card,
+.venture-card,
+.process-item {
+  will-change: transform;
+}
+
+.card-ic,
+.process-icon,
+.social-row a,
+.btn {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.social-row a:hover { transform: translateY(-3px) rotate(-3deg); }
+.card:hover .card-ic,
+.process-item:hover .process-icon { box-shadow: 0 10px 28px -8px rgba(139, 95, 232, .62); }
+
+@media (max-width: 560px) {
+  .section-head h2,
+  .page-hero h1 { gap: 9px; }
+  .section-head h2::before,
+  .page-hero h1::before {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-frame,
+  .section-head,
+  .section-head h2::before,
+  .page-hero h1::before {
+    animation: none !important;
+  }
+  .card,
+  .project-card,
+  .testi-card,
+  .venture-card,
+  .process-item,
+  .card-ic,
+  .process-icon,
+  .social-row a,
+  .btn {
+    transition: none !important;
+    will-change: auto;
+  }
+}
