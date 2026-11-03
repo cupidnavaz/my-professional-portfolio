@@ -54,3 +54,6 @@ td.act a.btn{padding:6px 10px}
 .dlg label{display:grid;gap:6px;font-size:13px;color:var(--dim)}.dlg label.chk{display:flex;align-items:center;gap:10px}.foot{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1b2560;border:1px solid var(--or);padding:10px 18px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:70}#toast.show{opacity:1}
 @media print{aside,.top,.bar .btn,.bar select,#scrim{display:none!important}body{background:#fff;color:#000}.card,.tbl{border:1px solid #ccc;background:#fff}th,td,h2,h3,.kpi b{color:#000!important}}
+
+.mc{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px 14px;align-items:center}.mc b{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}.mc span:not(.cp){font-size:14px}
+@media(max-width:560px){.mc{grid-template-columns:1fr 1fr}.mc span:not(.cp){grid-column:1/-1;margin-top:6px;color:var(--dim)}.mc b:first-child{display:none}}

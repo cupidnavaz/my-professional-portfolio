@@ -1210,3 +1210,8 @@ a.logo:hover{opacity:.9}.logo [hidden]{display:none!important}
 .project-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px; }
 .pg-cta .wrap{ width:calc(100% - 2*var(--gutter)); max-width:none; padding:36px 40px; margin:24px auto 72px; }
 @media (max-width:640px){ .pg-cta .wrap{ width:calc(100% - 32px); padding:26px 22px; } }
+
+/* ===== rounded logo + theme switch ===== */
+.logo img{border-radius:10px}
+.theme-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;font-size:17px;transition:transform .25s,border-color .2s}
+.theme-btn:hover{transform:rotate(20deg) scale(1.08);border-color:var(--orange)}

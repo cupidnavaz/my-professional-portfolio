@@ -203,6 +203,25 @@ function shareBtns(r){
 var FONTS=['Inter','Space Grotesk','Poppins','Montserrat','Playfair Display','Lora','Roboto','Open Sans','DM Sans','Raleway','Merriweather','Manrope','Sora','Nunito'];
 var SOC=['x','linkedin','instagram','facebook','youtube','github','tiktok','whatsapp','telegram'];
 var COLS=[['color_accent','Accent (buttons, highlights)','#f5821f'],['color_blue','Gradient blue','#4c7fff'],['color_violet','Gradient violet','#8b5fe8'],['color_bg','Page background','#0a0e27'],['color_text','Text','#ffffff']];
+var MC=[['text','Body text','#ffffff','#141a3a'],['heading','Headings','#ffffff','#141a3a'],['nav','Nav links','#9ba7d1','#3a4470'],['nav_hover','Nav hover / active','#f5821f','#d96a0b'],['footer','Footer text & links','#9ba7d1','#3a4470'],['link_hover','Link hover','#f5821f','#d96a0b']];
+function cpk(k,def,s){ return '<span class="cp"><input type="color" name="'+k+'" value="'+(s[k]||def)+'"><input type="checkbox" name="use_'+k+'"'+(s[k]?' checked':'')+' title="Use custom color"></span>'; }
+function sel(k,l,o,s){ return '<label>'+l+'<select name="'+k+'">'+o.map(function(x){return '<option value="'+x[0]+'"'+((s[k]||'')===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label>'; }
+function newSecs(s){
+  return '<div class="sec"><h3>Text &amp; link colors</h3><p class="muted">Separate colors for dark and light mode. Tick the box to use your color; untick to keep the default.</p><div class="mc"><b></b><b>Dark mode</b><b>Light mode</b>'+
+   MC.map(function(m){return '<span>'+m[1]+'</span>'+cpk('dk_'+m[0],m[2],s)+cpk('lt_'+m[0],m[3],s);}).join('')+'</div></div>'+
+  '<div class="sec"><h3>Hover &amp; animation</h3>'+
+   sel('anim_enabled','Animations',[['','On'],['off','Off (no motion at all)']],s)+sel('anim_hover','Card hover effect',[['','Lift + tilt'],['glow','Glow'],['zoom','Zoom'],['none','None']],s)+
+   sel('anim_tilt','3D tilt on cards',[['','On'],['off','Off']],s)+sel('anim_speed','Animation speed',[['','Normal'],['fast','Fast'],['slow','Slow']],s)+
+   sel('anim_reveal','Fade-in on scroll',[['','On'],['off','Off']],s)+sel('anim_button','Button shine on hover',[['','On'],['off','Off']],s)+
+   '<label>Button hover color'+cpk('btn_hover','#ff9d4d',s)+'</label><label>Card hover border / glow color'+cpk('card_hover','#f5821f',s)+'</label></div>'+
+  '<div class="sec"><h3>Logo &amp; theme switch</h3>'+sel('logo_shape','Logo corners',[['','Rounded (default)'],['circle','Circle'],['square','Square']],s)+
+   '<label>Logo border color'+cpk('logo_border','#f5821f',s)+'</label>'+sel('theme_toggle','Light / dark switch for visitors',[['','Hidden'],['on','Show in header']],s)+'</div>';
+}
+function newPuts(f,put){
+  MC.forEach(function(m){ ['dk_','lt_'].forEach(function(p){ var k=p+m[0]; put(k,f['use_'+k].checked?f[k].value:''); }); });
+  ['anim_enabled','anim_hover','anim_tilt','anim_speed','anim_reveal','anim_button','logo_shape','theme_toggle'].forEach(function(k){ put(k,f[k].value); });
+  ['btn_hover','card_hover','logo_border'].forEach(function(k){ put(k,f['use_'+k].checked?f[k].value:''); });
+}
 async function appearance(){
   var m=$('#main'); m.innerHTML='<p class="muted">Loading…</p>';
   var r=await sb.from('settings').select('*'), s={}; (r.data||[]).forEach(function(x){s[x.key]=x.value;});
@@ -217,7 +236,7 @@ async function appearance(){
    '<div class="sec"><h3>Colors</h3><p class="muted">Tick “use” to override a color; untick to go back to the default.</p>'+COLS.map(function(c){return '<label>'+c[1]+'<span class="cp"><input type="color" name="'+c[0]+'" value="'+(s[c[0]]||c[2])+'"><input type="checkbox" name="use_'+c[0]+'"'+(s[c[0]]?' checked':'')+'> use</span></label>';}).join('')+'</div>'+
    '<div class="sec"><h3>Fonts</h3>'+fsel('font_heading','Headings')+fsel('font_body','Body text')+'</div>'+
    '<div class="sec"><h3>Social links</h3><p class="muted">Full https:// links (WhatsApp: number with country code; Telegram: username). Empty = hidden.</p>'+SOC.map(function(k){return '<label>'+k+'<input name="social_'+k+'" value="'+esc(s['social_'+k]||'')+'"></label>';}).join('')+'</div>'+
-   '<div class="foot" style="justify-content:flex-start"><button class="btn">Save appearance</button><a class="btn ghost" href="../index.html" target="_blank">Preview site ↗</a></div></form>';
+   newSecs(s)+'<div class="foot" style="justify-content:flex-start"><button class="btn">Save appearance</button><a class="btn ghost" href="../index.html" target="_blank">Preview site ↗</a></div></form>';
   wireUploads($('#ap'));
   $('#ap').onsubmit=async function(e){
     e.preventDefault(); var f=e.target.elements, up=[], del=[];
@@ -225,7 +244,7 @@ async function appearance(){
     put('theme_mode',f.theme_mode.value); ['site_name','brand_display','site_logo','site_favicon'].forEach(function(k){ put(k,f[k].value.trim()); });
     COLS.forEach(function(c){ put(c[0],f['use_'+c[0]].checked?f[c[0]].value:''); });
     put('font_heading',f.font_heading.value); put('font_body',f.font_body.value);
-    SOC.forEach(function(k){ put('social_'+k,f['social_'+k].value.trim()); });
+    SOC.forEach(function(k){ put('social_'+k,f['social_'+k].value.trim()); }); newPuts(f,put);
     var a=up.length?await sb.from('settings').upsert(up):{}; var b=del.length?await sb.from('settings').delete().in('key',del):{};
     if(a.error||b.error){ toast((a.error||b.error).message); return; } toast('Saved. Refresh the site to see it.');
   };

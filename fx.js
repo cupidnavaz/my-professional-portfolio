@@ -31,7 +31,7 @@
   w.fxScan(); setTimeout(w.fxScan,1200); setTimeout(function(){ $$('.fx:not(.fx-in)').forEach(function(e){ var r=e.getBoundingClientRect(); if(r.top<w.innerHeight) e.classList.add('fx-in'); }); },2500);
   if(!reduce&&w.matchMedia('(hover:hover)').matches){
     d.addEventListener('pointermove',function(e){
-      var c=e.target.closest&&e.target.closest('.card,.project-card,.service-detail,.cred-card'); if(!c) return;
+      var c=e.target.closest&&e.target.closest('.card,.project-card,.service-detail,.cred-card'); if(!c||d.body.classList.contains('no-tilt')) return;
       var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
       c.classList.add('tilt'); c.style.setProperty('--ry',((x-.5)*7).toFixed(2)+'deg'); c.style.setProperty('--rx',((.5-y)*7).toFixed(2)+'deg'); c.style.setProperty('--mx',(x*100)+'%'); c.style.setProperty('--my',(y*100)+'%');
     });
