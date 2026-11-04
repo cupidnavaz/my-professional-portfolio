@@ -1260,3 +1260,31 @@ a.logo:hover{opacity:.9}.logo [hidden]{display:none!important}
 .sup-link:hover{border-color:var(--orange);transform:translateX(3px)}.sup-link span{font-size:22px}.sup-link b{display:block;font-size:14.5px}.sup-link small{color:var(--ink-dim);font-size:12.5px;word-break:break-all}
 #supMsg{font-size:13.5px;color:var(--ink-dim);margin-top:8px}.sup-body .btn{width:100%;justify-content:center}.sup-empty{color:var(--ink-dim)}
 @media(max-width:560px){.sup-btn{right:14px;bottom:14px;padding:13px}.sup-lbl{display:none}.sup-panel{right:8px;left:8px;width:auto;bottom:78px}}
+
+/* ===== marquee: glowing, fading, rotating-colour border ===== */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes angSpin{to{--ang:360deg}}
+@keyframes glowFade{0%,100%{opacity:.22}50%{opacity:.85}}
+@keyframes glowHue{from{filter:blur(16px) hue-rotate(0deg)}to{filter:blur(16px) hue-rotate(360deg)}}
+.marquee-fx{position:relative;isolation:isolate;border-radius:999px;padding:2px;margin-bottom:30px;
+  background:conic-gradient(from var(--ang),#4c7fff,#8b5fe8,#e14fa0,#f5821f,#4fd1c5,#4c7fff);animation:angSpin 6s linear infinite}
+.marquee-fx::after{content:"";position:absolute;inset:-4px;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:conic-gradient(from var(--ang),#4c7fff,#8b5fe8,#e14fa0,#f5821f,#4fd1c5,#4c7fff);
+  animation:angSpin 6s linear infinite,glowFade 3.4s ease-in-out infinite,glowHue 14s linear infinite}
+.marquee-fx .marquee{margin-bottom:0;border-color:transparent;background:linear-gradient(90deg,rgba(76,127,255,.10),rgba(139,95,232,.10) 50%,rgba(225,79,160,.10)),var(--bg)}
+/* ===== social icons ===== */
+.social-row a svg{width:20px;height:20px;fill:currentColor;display:block}
+.social-row a{color:inherit;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.social-row a:hover{background:var(--bc,var(--teal));border-color:var(--bc,var(--teal));color:#fff;transform:translateY(-3px)}
+.social-row a[data-n="x"]:hover,.social-row a[data-n="tiktok"]:hover,.social-row a[data-n="github"]:hover{border-color:rgba(255,255,255,.5)}
+
+/* ===== brand-coloured social icons ===== */
+.social-row a svg{width:22px;height:22px}
+.social-row a[data-n="linkedin"]{color:#3b9be8}.social-row a[data-n="instagram"]{color:#f0558a}.social-row a[data-n="facebook"]{color:#4a90f5}
+.social-row a[data-n="youtube"]{color:#ff4040}.social-row a[data-n="whatsapp"]{color:#25D366}.social-row a[data-n="telegram"]{color:#37b3ee}
+.social-row a:hover{color:#fff!important}
+/* ===== contact link icons ===== */
+.gi{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em;flex:none}.gi-fill{fill:currentColor}
+a.has-gi{display:inline-flex;align-items:center;gap:.1em}a.has-gi .gi{margin-right:.4em}
+a[href*="wa.me"] .gi-fill{color:#25D366}.btn[href*="wa.me"]:hover .gi-fill{color:inherit}
+.sup-gi{width:30px;height:30px;display:grid;place-items:center;flex:none}.sup-gi .gi{width:24px;height:24px;margin:0}
