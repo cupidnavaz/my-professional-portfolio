@@ -1,0 +1,58 @@
+// Customer support widget on every page: FAQ help, message form (creates a ticket) and direct contact options.
+(function(){
+  var d=document; if(d.getElementById('supBtn')) return;
+  var esc=function(t){ return String(t==null?'':t).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var cfg={hi:'Hi 👋 How can we help you today? Search the answers below or send us a message.',wa:'2349039454419',em:'uchennagodswill9@gmail.com',ph:'+2349039454419',hrs:''};
+  var faq=[{question:'How do I book a consultation?',answer:'Open the Contact page and choose the “Book a consultation” tab.'},{question:'How can I start a project?',answer:'Use “Start a project” on the site or send us a message here with a few details.'},{question:'Can I download your CV?',answer:'Yes. Open the About page and use Preview CV or Download PDF.'}];
+  var btn=d.createElement('button'); btn.id='supBtn'; btn.type='button'; btn.className='sup-btn'; btn.setAttribute('aria-label','Customer support'); btn.setAttribute('aria-expanded','false'); btn.innerHTML='<span class="sup-ic">💬</span><span class="sup-lbl">Support</span>';
+  var p=d.createElement('section'); p.id='supPanel'; p.className='sup-panel'; p.hidden=true; p.setAttribute('role','dialog'); p.setAttribute('aria-label','Customer support');
+  p.innerHTML='<div class="sup-head"><span class="sup-av">🛟</span><div><b>Customer support</b><small id="supHrs"><i class="pulse"></i> We’re here to help</small></div><button type="button" class="sup-x" aria-label="Close support">✕</button></div>'+
+   '<div class="sup-tabs"><button type="button" class="on" data-st="help">Help</button><button type="button" data-st="msg">Message us</button><button type="button" data-st="contact">Contact</button></div>'+
+   '<div class="sup-body"><div data-sp="help"><div class="sup-bubble" id="supHi"></div><input id="supQ" type="search" placeholder="Search help…" aria-label="Search help"><div id="supFaq"></div></div>'+
+   '<div data-sp="msg" hidden><form id="supForm"><input name="name" placeholder="Your name" required maxlength="80"><input name="email" type="email" placeholder="Email for our reply" required maxlength="120"><textarea name="message" rows="4" placeholder="How can we help?" required minlength="5" maxlength="3000"></textarea>'+
+   '<input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><button class="btn btn-primary" type="submit">Send message</button><p id="supMsg" role="status"></p></form></div>'+
+   '<div data-sp="contact" hidden id="supLinks"></div></div>';
+  d.body.appendChild(btn); d.body.appendChild(p);
+  var $=function(s){ return p.querySelector(s); }, $$=function(s){ return [].slice.call(p.querySelectorAll(s)); };
+  function draw(){
+    $('#supHi').textContent=cfg.hi; if(cfg.hrs) $('#supHrs').innerHTML='<i class="pulse"></i> '+esc(cfg.hrs);
+    $('#supFaq').innerHTML=faq.map(function(f){ return '<details class="sup-q"><summary>'+esc(f.question)+'</summary><p>'+esc(f.answer)+'</p></details>'; }).join('')||'<p class="sup-empty">No articles yet.</p>';
+    var digits=(cfg.wa||'').replace(/\D/g,''), L=[];
+    if(digits) L.push('<a class="sup-link" target="_blank" rel="noopener" href="https://wa.me/'+digits+'?text='+encodeURIComponent('Hello, I need help with ')+'"><span>💬</span><div><b>WhatsApp</b><small>Chat with us</small></div></a>');
+    if(cfg.em) L.push('<a class="sup-link" href="mailto:'+esc(cfg.em)+'"><span>✉️</span><div><b>Email</b><small>'+esc(cfg.em)+'</small></div></a>');
+    if(cfg.ph) L.push('<a class="sup-link" href="tel:'+esc(cfg.ph.replace(/[^\d+]/g,''))+'"><span>📞</span><div><b>Call</b><small>'+esc(cfg.ph)+'</small></div></a>');
+    L.push('<button type="button" class="sup-link" data-act="book"><span>📅</span><div><b>Book a consultation</b><small>Pick a time that suits you</small></div></button>');
+    $('#supLinks').innerHTML=L.join('');
+  }
+  draw();
+  function open(o){ p.hidden=!o; btn.setAttribute('aria-expanded',String(o)); btn.classList.toggle('open',o); if(o){ p.classList.remove('in'); void p.offsetWidth; p.classList.add('in'); } }
+  btn.addEventListener('click',function(){ open(p.hidden); });
+  $('.sup-x').addEventListener('click',function(){ open(false); btn.focus(); });
+  d.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!p.hidden) open(false); });
+  p.addEventListener('click',function(e){
+    var t=e.target.closest('[data-st]'); if(t){ $$('[data-st]').forEach(function(x){ x.classList.toggle('on',x===t); }); $$('[data-sp]').forEach(function(s){ s.hidden=s.getAttribute('data-sp')!==t.getAttribute('data-st'); }); }
+    if(e.target.closest('[data-act="book"]')){ open(false); if(window.openBooking) window.openBooking(); }
+  });
+  $('#supQ').addEventListener('input',function(){ var q=this.value.toLowerCase(); $$('.sup-q').forEach(function(x){ x.hidden=q&&x.textContent.toLowerCase().indexOf(q)<0; }); });
+  $('#supForm').addEventListener('submit',function(e){
+    e.preventDefault(); var f=e.target.elements, m=$('#supMsg'), b=e.target.querySelector('button'); if(f.website.value) return; b.disabled=true; m.textContent='Sending…';
+    var rec={name:f.name.value.trim(),email:f.email.value.trim(),subject:'Support request',message:f.message.value.trim(),page:(location.pathname.split('/').pop()||'index.html').slice(0,100)}, jobs=[];
+    if(typeof SUPABASE_READY!=='undefined'&&SUPABASE_READY) jobs.push(fetch(SUPABASE_URL+'/rest/v1/support_tickets',{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(rec)}).then(function(r){ return {ok:r.ok}; }).catch(function(){ return {ok:false}; }));
+    if(typeof sendEmail==='function') jobs.push(Promise.resolve(sendEmail({_subject:'Support request from '+rec.name,formType:'Support ticket',name:rec.name,email:rec.email,message:rec.message,page:rec.page})).then(function(r){ return {ok:!!(r&&r.ok)}; }).catch(function(){ return {ok:false}; }));
+    Promise.all(jobs).then(function(rs){
+      var ok=rs.some(function(r){ return r.ok; });
+      if(ok){ e.target.reset(); m.textContent='✓ Thanks! Your message was received. We’ll reply by email.'; }
+      else m.innerHTML='We couldn’t send that right now. Please <a href="mailto:'+esc(cfg.em)+'?subject=Support%20request&body='+encodeURIComponent(rec.message)+'">email us instead</a>.';
+      b.disabled=false;
+    });
+  });
+  // settings + editable FAQs from the admin panel
+  if(typeof fetchRecords==='function'&&typeof SUPABASE_READY!=='undefined'&&SUPABASE_READY){
+    fetchRecords('settings','?select=*&key=in.(support_enabled,support_greeting,support_whatsapp,support_email,support_phone,support_hours)').then(function(rows){
+      var s={}; rows.forEach(function(r){ s[r.key]=r.value; });
+      if(s.support_enabled==='off'){ btn.remove(); p.remove(); return; }
+      if(s.support_greeting) cfg.hi=s.support_greeting; if(s.support_whatsapp) cfg.wa=s.support_whatsapp; if(s.support_email) cfg.em=s.support_email; if(s.support_phone) cfg.ph=s.support_phone; if(s.support_hours) cfg.hrs=s.support_hours; draw();
+    });
+    fetchRecords('faqs','?select=*&published=eq.true&order=sort.asc').then(function(rows){ if(rows.length){ faq=rows; draw(); } });
+  }
+})();

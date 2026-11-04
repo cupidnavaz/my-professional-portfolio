@@ -48,8 +48,10 @@ s0.parentNode.insertBefore(s1,s0);
 </header>
 <section class="pg-hero" data-sec="contact.1"><div class="wrap"><p class="breadcrumb" data-edit="contact.1"><a href="index.html">Home</a> / Contact</p>
 <p class="pg-eyebrow" data-edit="contact.2">Get in touch</p><h1 data-edit="contact.3">Let’s <span class="accent">talk</span></h1><p class="lead" data-edit="contact.4">Share a few details and I’ll respond with next steps.</p></div></section>
-<section class="section-alt" data-sec="contact.2" id="contact">
-<div class="wrap contact-grid">
+<section class="section-alt switch-wrap" data-sec="contact.2" id="connect"><div class="wrap">
+<div class="switch-tabs" role="tablist"><button class="on" data-tab="contact" role="tab" type="button">✉️ Contact<span class="sw-l"> me</span></button><button data-tab="rate-us" role="tab" type="button">⭐ Rate<span class="sw-l"> my work</span></button>
+<button data-tab="book" role="tab" type="button">📅 Book<span class="sw-l"> a consultation</span></button></div>
+<div class="switch-pane" data-pane="contact" id="contact"><div class="contact-grid">
 <div class="contact-info" data-reveal="">
 <p class="eyebrow" data-edit="contact.5">Contact</p>
 <h2 data-edit="contact.6">Let's connect &amp; collaborate</h2>
@@ -85,8 +87,88 @@ s0.parentNode.insertBefore(s1,s0);
 <button class="btn btn-primary" id="contactSubmitBtn" style="align-self:flex-start;" type="submit">Send message</button>
 <p class="form-note" id="contactStatus">Sent straight to Uchenna — you'll see a delivery confirmation here once it's through.</p>
 </form>
+</div></div>
+<div class="switch-pane" data-pane="rate-us" hidden="" id="rate-us"><div class="contact-grid">
+<div class="contact-info" data-reveal="">
+<p class="eyebrow" data-edit="contact.10">Rate My Work</p>
+<h2 data-edit="contact.11">How did I do?</h2>
+<p data-edit="contact.12">Worked with me on a project? I'd love to hear how it went — your rating and testimonial help other clients know what to expect.</p>
+<div class="stat-row" style="margin-top:28px; padding-top:0; border-top:none;">
+<!-- EDIT ME: swap in your real aggregate numbers once you have reviews coming in -->
+<div class="stat"><b>4.9★</b><span>Average rating</span></div>
+<div class="stat"><b>12+</b><span>Client reviews</span></div>
 </div>
-</section>
+</div>
+<div data-reveal="">
+<form id="rateForm">
+<div class="rate-stars" id="rateStars">
+<button aria-label="1 star" class="rate-star" data-value="1" type="button">★</button>
+<button aria-label="2 stars" class="rate-star" data-value="2" type="button">★</button>
+<button aria-label="3 stars" class="rate-star" data-value="3" type="button">★</button>
+<button aria-label="4 stars" class="rate-star" data-value="4" type="button">★</button>
+<button aria-label="5 stars" class="rate-star" data-value="5" type="button">★</button>
+</div>
+<p class="form-note" id="rateHint" style="margin-bottom:18px;">Tap a star to rate your experience.</p>
+<div class="field">
+<label for="rateName">Your name</label>
+<input id="rateName" placeholder="Jordan Lee" required="" type="text"/>
+</div>
+<div class="field">
+<label for="rateRole">Role / Company (optional)</label>
+<input id="rateRole" placeholder="Founder, Acme Co." type="text"/>
+</div>
+<div class="field">
+<label for="rateMsg">Your testimonial</label>
+<textarea id="rateMsg" placeholder="Tell others what it was like working together..." required=""></textarea>
+</div>
+<button class="btn btn-primary" style="width:100%; justify-content:center;" type="submit">Submit review</button>
+<p class="form-note" style="margin-top:10px;">Opens your email app with your review pre-filled — hit send and it goes straight to me.</p>
+</form>
+<div class="rate-success" id="rateSuccess">
+<div class="check">✓</div>
+<h3 data-edit="contact.13">Thank you!</h3>
+<p class="book-sub" id="rateStatus">Your review means a lot — I'll get it added to the site.</p>
+</div>
+</div>
+</div></div><div class="switch-pane" data-pane="book" hidden="" id="book"><div class="book-card"><div id="bookForm">
+<div class="avatar-frame">
+<div class="avatar-inner">
+<svg fill="none" stroke="#9ba7d1" stroke-width="1.4" viewbox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+</svg>
+</div>
+</div>
+<h3 id="bookTitle">Book a 1:1 consultation</h3>
+<p class="book-sub" data-edit="contact.14">30 minutes with me, no charge — let's talk through your project before anything is scoped.</p>
+<form id="consultForm">
+<div class="field">
+<label for="bName">Your name</label>
+<input id="bName" placeholder="Jordan Lee" required="" type="text"/>
+</div>
+<div class="field">
+<label for="bEmail">Email address</label>
+<input id="bEmail" placeholder="jordan@company.com" required="" type="email"/>
+</div>
+<div class="field">
+<label for="bDate">Preferred date &amp; time</label>
+<input id="bDate" required="" type="datetime-local"/>
+</div>
+<div class="field">
+<label for="bMsg">What's on your mind?</label>
+<textarea id="bMsg" placeholder="A quick line about your project..."></textarea>
+</div>
+<button class="btn btn-primary" id="bookSubmitBtn" style="width:100%; justify-content:center; margin-top:4px;" type="submit">
+          Request consultation
+        </button>
+<p class="form-note" style="margin-top:10px;">Sent straight to Uchenna — you'll see a delivery confirmation below once it's through.</p>
+</form>
+</div><div class="book-success" id="bookSuccess">
+<div class="check">✓</div>
+<h3>Request sent!</h3>
+<p class="book-sub" id="bookStatus">Thanks — I'll get back to you shortly to confirm the time.</p>
+<button class="btn btn-ghost" id="bookAgain" style="width:100%; justify-content:center;">Book another slot</button>
+</div></div></div></div></section>
 <footer>
 <div class="wrap">
 <p>© 2026 Uchenna Godswill · Founder, CupidCreativeX Ventures. Built with intent, not templates.</p>
@@ -219,60 +301,10 @@ If you’re looking for a data analyst who blends technical expertise with strat
 </div>
 </div>
 <!-- ============ CONSULTATION BOOKING ============ -->
-<button aria-controls="bookOverlay" aria-haspopup="dialog" class="book-fab" id="bookFab">
-  🗓️ Book a Consultation
-</button>
-<div aria-labelledby="bookTitle" aria-modal="true" class="book-overlay" id="bookOverlay" role="dialog">
-<div class="book-modal">
-<button aria-label="Close booking form" class="book-close" id="bookClose">✕</button>
-<div id="bookForm">
-<div class="avatar-frame">
-<div class="avatar-inner">
-<svg fill="none" stroke="#9ba7d1" stroke-width="1.4" viewbox="0 0 24 24">
-<circle cx="12" cy="8" r="4"></circle>
-<path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
-</svg>
-</div>
-</div>
-<h3 id="bookTitle">Book a 1:1 consultation</h3>
-<p class="book-sub">30 minutes with me, no charge — let's talk through your project before anything is scoped.</p>
-<form id="consultForm">
-<div class="field">
-<label for="bName">Your name</label>
-<input id="bName" placeholder="Jordan Lee" required="" type="text"/>
-</div>
-<div class="field">
-<label for="bEmail">Email address</label>
-<input id="bEmail" placeholder="jordan@company.com" required="" type="email"/>
-</div>
-<div class="field">
-<label for="bDate">Preferred date &amp; time</label>
-<input id="bDate" required="" type="datetime-local"/>
-</div>
-<div class="field">
-<label for="bMsg">What's on your mind?</label>
-<textarea id="bMsg" placeholder="A quick line about your project..."></textarea>
-</div>
-<button class="btn btn-primary" id="bookSubmitBtn" style="width:100%; justify-content:center; margin-top:4px;" type="submit">
-          Request consultation
-        </button>
-<p class="form-note" style="margin-top:10px;">Sent straight to Uchenna — you'll see a delivery confirmation below once it's through.</p>
-</form>
-</div>
-<div class="book-success" id="bookSuccess">
-<div class="check">✓</div>
-<h3>Request sent!</h3>
-<p class="book-sub" id="bookStatus">Thanks — I'll get back to you shortly to confirm the time.</p>
-<button class="btn btn-ghost" id="bookAgain" style="width:100%; justify-content:center;">Book another slot</button>
-</div>
-</div>
-</div>
 <script src="fx.js"></script>
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script src="cms.js"></script>
-<script src="config.js"></script>
-<script src="script.js"></script>
-<script src="cms.js"></script>
+<script src="support.js"></script>
 </body>
 </html>

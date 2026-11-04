@@ -129,34 +129,13 @@ function mailtoFallback(subject, bodyText){
 
   // ---------- Booking modal ----------
   (function(){
-    var fab = document.getElementById('bookFab');
-    var overlay = document.getElementById('bookOverlay');
-    var closeBtn = document.getElementById('bookClose');
     var form = document.getElementById('consultForm');
     var formWrap = document.getElementById('bookForm');
     var successWrap = document.getElementById('bookSuccess');
     var bookAgain = document.getElementById('bookAgain');
     var submitBtn = document.getElementById('bookSubmitBtn');
     var statusEl = document.getElementById('bookStatus');
-
-    function openModal(){
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      var firstField = document.getElementById('bName');
-      if(firstField) setTimeout(function(){ firstField.focus(); }, 200);
-    }
-    function closeModal(){
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    fab.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function(e){
-      if(e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
-    });
+    if(!form) return;
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
@@ -197,7 +176,7 @@ function mailtoFallback(subject, bodyText){
       });
     });
 
-    bookAgain.addEventListener('click', function(){
+    if(bookAgain) bookAgain.addEventListener('click', function(){
       successWrap.classList.remove('show');
       formWrap.style.display = 'block';
       form.reset();
@@ -576,8 +555,7 @@ function mailtoFallback(subject, bodyText){
   if(moreYes){
     moreYes.addEventListener('click', function(){
       closeQuiz();
-      var fab = document.getElementById('bookFab');
-      if(fab) setTimeout(function(){ fab.click(); }, 300);
+      setTimeout(function(){ if(window.openBooking) window.openBooking(); }, 300);
     });
   }
   if(moreNo){
@@ -830,8 +808,7 @@ function mailtoFallback(subject, bodyText){
   if(bookBtn){
     bookBtn.addEventListener('click', function(){
       closeBio();
-      var fab = document.getElementById('bookFab');
-      if(fab) setTimeout(function(){ fab.click(); }, 300);
+      setTimeout(function(){ if(window.openBooking) window.openBooking(); }, 300);
     });
   }
 })();

@@ -74,6 +74,7 @@
     if(scroll) w.scrollIntoView({behavior:'smooth',block:'start'});
   }
   d.addEventListener('click',function(e){ var b=e.target.closest('[data-tab]'); if(b){ pick(b.getAttribute('data-tab'),false); } });
-  function fromHash(){ var h=(location.hash||'').slice(1); if(h==='contact'||h==='rate-us') pick(h,true); }
+  function fromHash(){ var h=(location.hash||'').slice(1); if(h==='contact'||h==='rate-us'||h==='book') pick(h,true); }
   w.addEventListener('hashchange',fromHash); if($('.switch-wrap')) setTimeout(fromHash,50);
+  w.openBooking=function(){ if($('.switch-wrap')) pick('book',true); else location.href='contact.html#book'; };
 })();
