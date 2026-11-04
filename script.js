@@ -57,7 +57,8 @@ function storeRecord(table, record){
 function fetchRecords(table, query){
   if(!SUPABASE_READY) return Promise.resolve([]);
   return fetch(SUPABASE_URL + '/rest/v1/' + table + (query || ''), {
-    headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':'Bearer ' + SUPABASE_ANON_KEY }
+    headers:{ 'apikey': SUPABASE_ANON_KEY, 'Authorization':'Bearer ' + SUPABASE_ANON_KEY },
+    cache: 'no-store'
   }).then(function(res){ return res.ok ? res.json() : []; })
     .catch(function(){ return []; });
 }
@@ -931,6 +932,7 @@ function mailtoFallback(subject, bodyText){
 
   fetchRecords('reviews', '?select=*&order=created_at.desc&limit=20').then(function(reviews){
     if(!reviews || reviews.length === 0) return;
+    grid.innerHTML = '';   // admin-managed reviews replace the built-in samples
     reviews.forEach(function(r){
       var rating = parseInt(r.rating, 10) || 5;
       var initials = (r.name || '').split(' ').filter(Boolean).map(function(n){ return n[0]; }).join('').slice(0,2).toUpperCase() || '★';
@@ -949,7 +951,7 @@ function mailtoFallback(subject, bodyText){
           '<div class="testi-avatar">' + initials + '</div>' +
           '<div><b>' + safeName + '</b><span>' + safeRole + '</span></div>' +
         '</div>';
-      grid.insertBefore(card, grid.firstChild);
+      grid.appendChild(card);
     });
   });
 })();
