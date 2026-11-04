@@ -1,4 +1,4 @@
-# Uchenna Godswill Portfolio
+# Uchenna Godswill'S Portfolio
 
 <p align="center">
   <img src="assets/cupidcreativex-mark.png" alt="Uchenna Godswill logo" width="120" />
@@ -250,5 +250,3 @@ Founder, CupidCreativeX Ventures
 - WhatsApp: https://wa.me/2349039454419
 
 ---
-
-If you want, I can also create a shorter GitHub-optimized version or a more premium marketing-style README with screenshots placeholders and stronger branding.
