@@ -23,6 +23,7 @@ This project is built as a static front-end website with no build step, and incl
 
 ## Overview
 
+<<<<<<< Updated upstream
 This portfolio is built for a professional brand focused on:
 
 - Data analysis and business intelligence
@@ -250,3 +251,13 @@ Founder, CupidCreativeX Ventures
 - WhatsApp: https://wa.me/2349039454419
 
 ---
+=======
+## Editing every page
+Run `supabase-content.sql` once. Then in Admin: **Edit page text** (change any text, button or image, hide sections), **Custom sections** (add new sections to any page) and **Custom pages** (new pages at `page.html?p=slug`, optionally in the menu).
+
+## Make the forms work
+Edit `config.js`:
+- `FORMSPREE_ENDPOINT`: create a form at https://formspree.io and paste its endpoint.
+- `SUPABASE_URL` / `SUPABASE_ANON_KEY`: create a project at https://supabase.com, run `supabase.sql` in its SQL Editor, then copy the values from Project Settings → API.
+Until then, forms fall back to opening the visitor's email app.
+>>>>>>> Stashed changes

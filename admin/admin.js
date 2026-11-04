@@ -28,6 +28,8 @@ var T={
  plugins:{label:'Plugins',pk:'key',order:'key',asc:1,cols:['name','key','enabled'],note:'Switch on tools for the public site. <b>config</b>: Google Analytics = measurement ID (G-XXXX); Meta Pixel = pixel ID; Tawk.to = propertyId/widgetId; Custom CSS / JavaScript = the code itself.',fields:[['key','text','req'],['name','text','req'],['enabled','bool'],['config','textarea']]},
  webhooks:{label:'Webhooks',order:'created_at',cols:['name','url','events','active'],note:'Events: <b>booking.created, message.created, lead.created, review.created, post.publish, reminder.due, task.due</b>. Leave events empty to receive all. Works with Zapier, Make, n8n, Discord and similar. The secret is sent in the <b>X-Webhook-Secret</b> header.',fields:[['name','text','req'],['url','text','req','https://…'],['events','text','','Comma-separated'],['secret','text'],['active','bool']]},
  social_posts:{label:'Social posts',cols:['content','platforms','status'],note:'Set status to <b>queued</b> and save: the post is sent to your webhooks (event <b>post.publish</b>) so Zapier/Make/n8n can publish it to each platform. The share buttons open each network pre-filled so you can post manually.',fields:[['content','textarea','req'],['image_url','text','','Paste a URL from Media'],['link_url','text'],['platforms','text','','Comma-separated: x, facebook, linkedin, instagram, telegram, whatsapp'],['status','select',['draft','queued','sent']]]},
+ site_pages:{label:'Custom pages',order:'sort',asc:1,cols:['title','slug','show_in_nav','published'],note:'Create a new page. It opens at <b>page.html?p=your-slug</b> and can appear in the menu. Then add its content under <b>Custom sections</b> using the slug as the page.',fields:[['title','text','req'],['slug','text','req','Lowercase letters, numbers, hyphens'],['intro','textarea','','Shown under the title'],['nav_label','text','','Menu text (defaults to the title)'],['show_in_nav','bool'],['published','bool'],['sort','number']]},
+ page_sections:{label:'Custom sections',order:'sort',asc:1,cols:['page','heading','layout','placement','published'],note:'Add a new section to any page. <b>Page</b> = home, about, ventures, services, projects, credentials, reviews, contact, or a custom page slug. Body supports blank lines for paragraphs, **bold** and [link text](https://…).',fields:[['page','text','req','e.g. home, about, or a custom slug'],['placement','select',['bottom','top']],['layout','select',['text','image-left','image-right','cta']],['eyebrow','text'],['heading','text','req'],['body','textarea'],['image_url','text','','Optional image'],['button_text','text'],['button_url','text','','https://… or contact.html'],['style','select',['default','alt','accent']],['sort','number'],['published','bool']]},
  credentials:{label:'Credentials',order:'sort',asc:1,cols:['title','type','issuer','year','published'],note:'Shown on the Credentials page and previewed on About. Type decides the section (qualification or certification).',fields:[['type','select',['qualification','certification']],['title','text','req'],['issuer','text','','School or awarding body'],['year','text','','e.g. 2023 or 2021–2024'],['description','textarea'],['credential_url','text','','Link to verify or view'],['image_url','text','','Optional logo/badge URL'],['icon','text','','Emoji if no image'],['sort','number'],['published','bool']]},
  recommendations:{label:'Recommendations',order:'created_at',cols:['name','role','rating','message','approved'],note:'New public submissions arrive <b>unapproved</b>. Tick “approved” to show one on the Credentials page.',fields:[['name','text','req'],['role','text'],['rating','number','','1 to 5'],['message','textarea','req'],['approved','bool']]},
  activity_log:{label:'Activity log',ro:1,order:'created_at',cols:['created_at','kind','message','actor'],note:'Everything that happens: public submissions, your own admin actions, reminders and tasks. Newest first.'},
@@ -39,7 +41,7 @@ var T={
  admins:{label:'Admins',pk:'email',order:'email',asc:1,cols:['email'],note:'Emails allowed into this panel. The person must also have a user in Supabase Authentication. Never delete your own row.',fields:[['email','text','req']]}
 };
 var cur,rows=[];
-var NAV=[['Dashboard',[['overview','📊','Dashboard'],['reports','📈','Reports'],['activity_log','🕒','Activity log'],['page_views','👁','Page views']]],['Inbox',[['bookings','📅','Bookings'],['quiz_leads','🎯','Project leads'],['contact_messages','✉️','Messages'],['reviews','⭐','Reviews'],['recommendations','💬','Recommendations']]],['Content',[['projects','🗂','Projects'],['credentials','🎓','Credentials'],['services','🛠','Services'],['media','🖼','Media'],['appearance','🎨','Appearance'],['social_posts','📣','Social posts']]],['Automation',[['advisor','💡','Task advisor'],['tasks','✅','Tasks'],['reminders','⏰','Reminders'],['event_handlers','⚡','Event handlers'],['webhooks','🔗','Webhooks'],['plugins','🧩','Plugins']]],['System',[['settings','⚙️','Site settings'],['admins','🔐','Admins']]]];
+var NAV=[['Dashboard',[['overview','📊','Dashboard'],['reports','📈','Reports'],['activity_log','🕒','Activity log'],['page_views','👁','Page views']]],['Inbox',[['bookings','📅','Bookings'],['quiz_leads','🎯','Project leads'],['contact_messages','✉️','Messages'],['reviews','⭐','Reviews'],['recommendations','💬','Recommendations']]],['Content',[['projects','🗂','Projects'],['credentials','🎓','Credentials'],['services','🛠','Services'],['media','🖼','Media'],['appearance','🎨','Appearance'],['social_posts','📣','Social posts']]],['Automation',[['advisor','💡','Task advisor'],['tasks','✅','Tasks'],['reminders','⏰','Reminders'],['event_handlers','⚡','Event handlers'],['webhooks','🔗','Webhooks'],['plugins','🧩','Plugins']]],['Pages',[['content','📝','Edit page text'],['page_sections','🧱','Custom sections'],['site_pages','📄','Custom pages']]],['System',[['settings','⚙️','Site settings'],['admins','🔐','Admins']]]];
 $('#nav').innerHTML=NAV.map(function(g){return '<h4>'+g[0]+'</h4>'+g[1].map(function(x){return '<button data-t="'+x[0]+'"><span>'+x[1]+'</span>'+x[2]+'</button>';}).join('');}).join('');
 $('#nav').onclick=function(e){ var b=e.target.closest('button'); if(b) show(b.dataset.t); };
 function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2400);}
@@ -47,7 +49,7 @@ function mark(t){ document.querySelectorAll('#nav button').forEach(function(b){b
 
 async function show(t){
   cur=t; mark(t); killCharts(); location.hash=t; var m=$('#main');
-  if(t==='reports') return reports(); if(t==='advisor') return advisorPage(); if(t==='appearance') return appearance(); if(t==='media') return media(); if(t==='overview'||!T[t]) return overview();
+  if(t==='content') return contentEditor(); if(t==='reports') return reports(); if(t==='advisor') return advisorPage(); if(t==='appearance') return appearance(); if(t==='media') return media(); if(t==='overview'||!T[t]) return overview();
   var c=T[t]; m.innerHTML='<div class="bar"><h2>'+c.label+'</h2><input id="q" placeholder="Search…">'+(c.ro?'':'<button class="btn" id="new">+ New</button>')+'</div>'+(c.note?'<div class="note">'+c.note+'</div>':'')+'<div class="tbl'+(c.ro?' ro':'')+'" id="tbl"><p class="muted" style="padding:16px">Loading…</p></div>';
   if($('#new')) $('#new').onclick=function(){ form(null); }; $('#q').oninput=draw;
   var r=await sb.from(t).select('*').order(c.order||'created_at',{ascending:!!c.asc});
@@ -196,6 +198,33 @@ function wireUploads(root){
     if(r.error){ toast(r.error.message+' (run supabase-features.sql)'); return; }
     var tgt=root.querySelector('[name="'+f.dataset.up+'"]'); tgt.value=sb.storage.from('media').getPublicUrl(nm).data.publicUrl; toast('Uploaded'); }; });
 }
+var PGS=[['home','index.html','Home'],['about','about.html','About'],['ventures','ventures.html','Ventures'],['services','services.html','Services'],['projects','projects.html','Projects'],['credentials','credentials.html','Credentials'],['reviews','reviews.html','Reviews'],['contact','contact.html','Contact'],['bio','index.html','Bio card'],['nav','index.html','Menu labels']], curPg='home';
+async function contentEditor(){
+  var m=$('#main'); m.innerHTML='<p class="muted">Loading page…</p>';
+  var pg=PGS.filter(function(p){return p[0]===curPg;})[0], res=await Promise.all([fetch('../'+pg[1],{cache:'no-store'}).then(function(r){return r.text();}),sb.from('page_content').select('*')]);
+  var doc=new DOMParser().parseFromString(res[0],'text/html'), O={}; (res[1].data||[]).forEach(function(r){O[r.key]=r;});
+  var pre=curPg+'.', els=[].slice.call(doc.querySelectorAll('[data-edit^="'+pre+'"]')), secs=[].slice.call(doc.querySelectorAll('[data-sec^="'+pre+'"]'));
+  var kind=function(e){ if(e.tagName==='IMG') return 'img'; if(e.tagName==='A'&&!/data-(open|cv)/.test(e.outerHTML.split('>')[0])) return 'link'; return 'text'; };
+  var dflt=function(e,k){ return k==='img'?e.getAttribute('src'):k==='link'?e.textContent.trim():e.innerHTML.replace(/\s+/g,' ').trim(); };
+  var lab={H1:'Title',H2:'Heading',H3:'Subheading',H4:'Label',P:'Text',SPAN:'Label',A:'Button',BUTTON:'Button',IMG:'Image'};
+  m.innerHTML='<div class="bar"><h2>Edit page text</h2><select id="pgsel">'+PGS.map(function(p){return '<option value="'+p[0]+'"'+(p[0]===curPg?' selected':'')+'>'+p[2]+'</option>';}).join('')+'</select></div>'+
+   '<div class="note">Change any text, button or image on the selected page. <b>Reset</b> goes back to the original. To add or remove whole sections, use the visibility switches below or <b>Custom sections</b>. Shown text may include simple formatting.</div>'+
+   (secs.length?'<div class="sec" style="margin-bottom:16px"><h3>Sections on this page</h3>'+secs.map(function(s){ var key=s.getAttribute('data-sec'), t=((s.querySelector('h1,h2,h3')||{}).textContent||s.id||s.className||key).trim().replace(/\s+/g,' ').slice(0,70);
+     return '<label class="chk" style="display:flex;gap:10px;align-items:center"><input type="checkbox" data-hide="'+key+'"'+(O['hide.'+key]?'':' checked')+'> '+esc(t)+'</label>'; }).join('')+'</div>':'')+
+   (els.length?els.map(function(e){ var k=e.getAttribute('data-edit'), kd=kind(e), o=O[k], d=dflt(e,kd), v=o&&o.value!=null?o.value:d;
+     var f=kd==='img'?'<input name="v" value="'+esc(v)+'"><span class="up-row"><input type="file" accept="image/*" data-up="v"></span>':
+       kd==='link'?'<input name="v" value="'+esc(v)+'" placeholder="Button text"><input name="h" value="'+esc((o&&o.href)||e.getAttribute('href')||'')+'" placeholder="Link URL" style="margin-top:6px">':
+       '<textarea name="v" rows="'+Math.min(6,Math.max(2,Math.ceil(v.length/80)))+'">'+esc(v)+'</textarea>';
+     return '<div class="sec blk" data-k="'+esc(k)+'" data-kind="'+kd+'" style="margin-bottom:12px"><h3 style="font-size:14px">'+(lab[e.tagName]||'Text')+(o?' <span class="pill y">edited</span>':'')+'</h3><label>'+f+'</label><div class="foot" style="justify-content:flex-start;margin:0"><button class="btn sm" data-s="1">Save</button><button class="btn ghost sm" data-r="1">Reset</button></div></div>'; }).join(''):'<p class="muted">No editable blocks found on this page.</p>');
+  $('#pgsel').onchange=function(){ curPg=this.value; contentEditor(); };
+  wireUploads(m);
+  m.onchange=async function(e){ var h=e.target.getAttribute&&e.target.getAttribute('data-hide'); if(!h) return;
+    var r=e.target.checked?await sb.from('page_content').delete().eq('key','hide.'+h):await sb.from('page_content').upsert({key:'hide.'+h,page:curPg,kind:'hide',value:'1'}); toast(r.error?r.error.message:'Saved'); if(!r.error) log((e.target.checked?'Showed':'Hid')+' section '+h); };
+  m.onclick=async function(e){ var b=e.target.closest('button'); if(!b||!b.closest('.blk')) return; var bl=b.closest('.blk'), k=bl.dataset.k, kd=bl.dataset.kind, el=els.filter(function(x){return x.getAttribute('data-edit')===k;})[0];
+    if(b.dataset.r){ var r=await sb.from('page_content').delete().eq('key',k); toast(r.error?r.error.message:'Reset'); if(!r.error){ log('Reset '+k); contentEditor(); } return; }
+    if(b.dataset.s){ var v=bl.querySelector('[name=v]').value.trim(), h=bl.querySelector('[name=h]'), row={key:k,page:curPg,kind:kd,value:v,href:h?h.value.trim():null};
+      var r=await sb.from('page_content').upsert(row); toast(r.error?r.error.message:'Saved'); if(!r.error){ log('Edited '+k); contentEditor(); } } };
+}
 function shareBtns(r){
   var t=encodeURIComponent(r.content||''), u=encodeURIComponent(r.link_url||location.origin.replace(/\/admin.*/,'')), L=function(n,h){return '<a class="btn ghost sm" target="_blank" rel="noopener" href="'+h+'">'+n+'</a>';};
   return L('X','https://twitter.com/intent/tweet?text='+t+'&url='+u)+L('FB','https://www.facebook.com/sharer/sharer.php?u='+u)+L('in','https://www.linkedin.com/sharing/share-offsite/?url='+u)+L('WA','https://wa.me/?text='+t+'%20'+u)+L('TG','https://t.me/share/url?url='+u+'&text='+t);
@@ -223,13 +252,14 @@ function moreSecs(s){
     ta('footer_text','Footer line 1','© 2026 Your Name · Your tagline',2)+ta('footer_tagline','Footer line 2','Data · Design · Development',2)+
     ta('footer_links','Footer links (one per line: Label | URL)','Privacy | privacy.html&#10;Instagram | https://instagram.com/you&#10;Email | mailto:you@example.com',4)+'</div>'+
   '<div class="sec"><h3>Hero section</h3><label>Hero intro text<textarea name="hero_lead" rows="3">'+esc(s.hero_lead||'')+'</textarea></label>'+
-    '<label>Center image of the spinning rings<input name="hero_image" value="'+esc(s.hero_image||'')+'" placeholder="Image URL, or upload below"><span class="up-row"><input type="file" accept="image/*" data-up="hero_image"></span></label>'+
+    '<label>Spinner center image (inside the rotating rings)<input name="hero_image" value="'+esc(s.hero_image||'')+'" placeholder="Image URL, or upload below"><span class="up-row"><input type="file" accept="image/*" data-up="hero_image"></span></label>'+
+    '<label>Portfolio avatar (hero photo &amp; bio card)<input name="avatar_image" value="'+esc(s.avatar_image||'')+'" placeholder="Image URL, or upload below"><span class="up-row"><input type="file" accept="image/*" data-up="avatar_image"></span></label>'+
     sel('spin_speed','Ring spin speed',[['','Normal'],['slow','Slow'],['fast','Fast'],['off','Stopped']],s)+'</div>'+
   '<div class="sec"><h3>Resume / CV</h3><p class="muted">Upload a PDF. It powers the “Preview CV” and “Download PDF” buttons on the About page and bio card.</p>'+
     '<label>CV link<input name="cv_url" value="'+esc(s.cv_url||'')+'" placeholder="Upload a PDF below or paste a link"><span class="up-row"><input type="file" accept="application/pdf" data-up="cv_url"></span></label>'+
     (s.cv_url?'<a class="btn ghost sm" href="'+esc(s.cv_url)+'" target="_blank" rel="noopener" style="justify-self:start">Open current CV ↗</a>':'')+'</div>';
 }
-function morePuts(f,put){ ['footer_text','footer_tagline','footer_links','hero_lead','hero_image','spin_speed','cv_url'].forEach(function(k){ put(k,f[k].value.trim()); }); }
+function morePuts(f,put){ ['footer_text','footer_tagline','footer_links','hero_lead','hero_image','avatar_image','spin_speed','cv_url'].forEach(function(k){ put(k,f[k].value.trim()); }); }
 function newPuts(f,put){
   MC.forEach(function(m){ ['dk_','lt_'].forEach(function(p){ var k=p+m[0]; put(k,f['use_'+k].checked?f[k].value:''); }); });
   ['anim_enabled','anim_hover','anim_tilt','anim_speed','anim_reveal','anim_button','logo_shape','theme_toggle'].forEach(function(k){ put(k,f[k].value); });

@@ -1,491 +1,445 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Projects — Uchenna Godswill</title>
-<meta name="description" content="Uchenna Godswill — data analytics, design, development and agile delivery. Founder of CupidCreativeX.">
-<link rel="icon" type="image/png" href="assets/cupidcreativex-mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<meta content="Uchenna Godswill — data analytics, design, development and agile delivery. Founder of CupidCreativeX." name="description"/>
+<link href="assets/cupidcreativex-mark.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 </head>
-<body class="sub">
-
+<body class="sub" data-pg="projects">
 <div class="bg-glow"></div>
-
 <header>
-  <nav class="wrap">
-    <a class="logo" href="index.html" aria-label="Go to homepage"><img id="siteLogo" src="assets/cupidcreativex-mark.png" alt=""><span id="siteName">Uchenna Godswill .U.</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="about.html">About</a></li>
-      <li><a href="ventures.html">Ventures</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a class="active" href="projects.html">Projects</a></li>
-      <li><a href="credentials.html">Credentials</a></li>
-      <li><a href="reviews.html">Reviews</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li class="admin-only" hidden><a href="admin/dashboard.html">Dashboard</a></li>
-    </ul>
-    <div class="nav-cta">
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks">☰</button>
-      <button type="button" class="btn btn-primary" data-open-quiz>Start a project</button>
-    </div>
-  </nav>
+<nav class="wrap">
+<a aria-label="Go to homepage" class="logo" href="index.html"><img alt="" id="siteLogo" src="assets/cupidcreativex-mark.png"/><span id="siteName">Uchenna Godswill .U.</span></a>
+<ul class="nav-links" id="navLinks">
+<li><a data-edit="nav.1" href="about.html">About</a></li>
+<li><a data-edit="nav.2" href="ventures.html">Ventures</a></li>
+<li><a data-edit="nav.3" href="services.html">Services</a></li>
+<li><a class="active" data-edit="nav.4" href="projects.html">Projects</a></li>
+<li><a data-edit="nav.5" href="credentials.html">Credentials</a></li>
+<li><a data-edit="nav.6" href="reviews.html">Reviews</a></li>
+<li><a data-edit="nav.7" href="contact.html">Contact</a></li>
+<li class="admin-only" hidden=""><a href="admin/dashboard.html">Dashboard</a></li>
+</ul>
+<div class="nav-cta">
+<button aria-controls="navLinks" aria-label="Toggle menu" class="nav-toggle" id="navToggle">☰</button>
+<button class="btn btn-primary" data-open-quiz="" type="button">Start a project</button>
+</div>
+</nav>
 </header>
-
-
 <!-- ============ PAGE HERO ============ -->
-<section class="pg-hero">
-  <div class="wrap" data-reveal>
-    <p class="breadcrumb"><a href="index.html">Home</a> / Projects</p>
-    <p class="eyebrow">Case Studies</p>
-    <h1>Work, <span class="accent" style="background:var(--grad-signature); -webkit-background-clip:text; background-clip:text; color:transparent;">organized by discipline.</span></h1>
-    <p class="lead">Every project below sits in the category it was primarily delivered under — filter to jump straight to what you're evaluating.</p>
-  </div>
+<section class="pg-hero" data-sec="projects.1">
+<div class="wrap" data-reveal="">
+<p class="breadcrumb" data-edit="projects.1"><a href="index.html">Home</a> / Projects</p>
+<p class="eyebrow" data-edit="projects.2">Case Studies</p>
+<h1 data-edit="projects.3">Work, <span class="accent" style="background:var(--grad-signature); -webkit-background-clip:text; background-clip:text; color:transparent;">organized by discipline.</span></h1>
+<p class="lead" data-edit="projects.4">Every project below sits in the category it was primarily delivered under — filter to jump straight to what you're evaluating.</p>
+</div>
 </section>
-
 <!-- ============ PROJECTS ============ -->
-<section>
-  <div class="wrap">
-
-    <div class="filter-row" data-reveal>
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      <button class="filter-btn" data-filter="data">Data Analytics</button>
-      <button class="filter-btn" data-filter="web">Web &amp; App Development</button>
-      <button class="filter-btn" data-filter="uiux">UI/UX Design</button>
-      <button class="filter-btn" data-filter="branding">Branding &amp; Graphics</button>
-    </div>
-
-    <!-- ===== DATA ANALYTICS ===== -->
-    <div class="category-block" data-reveal>
-      <div class="category-head">
-        <h2>📊 Data Analytics &amp; Insights</h2>
-        <span>2 projects</span>
-      </div>
-      <div class="project-grid">
-
-        <div class="project-card" data-cat="data" id="northstar-dashboard">
-          <div class="project-thumb thumb-1">
-            <svg viewBox="0 0 200 120" width="70%" height="70%" fill="none">
-              <rect x="10" y="8" width="180" height="104" rx="8" fill="#0d1740" stroke="#4c7fff" stroke-width="1.5"/>
-              <circle cx="24" cy="20" r="2.5" fill="#e14fa0"/>
-              <circle cx="33" cy="20" r="2.5" fill="#f5821f"/>
-              <circle cx="42" cy="20" r="2.5" fill="#4fd1c5"/>
-              <line x1="10" y1="30" x2="190" y2="30" stroke="#233a8a" stroke-width="1"/>
-              <rect x="22" y="70" width="14" height="32" rx="2" fill="#4c7fff" class="chart-bar" style="animation-delay:0s"/>
-              <rect x="44" y="55" width="14" height="47" rx="2" fill="#8b5fe8" class="chart-bar" style="animation-delay:.15s"/>
-              <rect x="66" y="40" width="14" height="62" rx="2" fill="#4fd1c5" class="chart-bar" style="animation-delay:.3s"/>
-              <rect x="88" y="60" width="14" height="42" rx="2" fill="#4c7fff" class="chart-bar" style="animation-delay:.45s"/>
-              <rect x="110" y="48" width="14" height="54" rx="2" fill="#8b5fe8" class="chart-bar" style="animation-delay:.6s"/>
-              <polyline points="130,80 145,55 160,68 178,42" stroke="#f5821f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle r="3.5" fill="#f5821f" class="chart-trend-dot" style="offset-path:path('M130,80 L145,55 L160,68 L178,42')"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">Data Analytics</span>
-            <h3>Northstar Sales Dashboard</h3>
-            <p>A Power BI + SQL reporting layer that cut weekly reporting time by 70% for a 40-person sales team.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-cat="data" id="fieldnote-analytics">
-          <div class="project-thumb thumb-1">
-            <svg viewBox="0 0 200 120" width="70%" height="70%" fill="none">
-              <rect x="10" y="8" width="180" height="104" rx="8" fill="#0d1740" stroke="#4c7fff" stroke-width="1.5"/>
-              <circle cx="55" cy="60" r="30" fill="none" stroke="#233a8a" stroke-width="14"/>
-              <circle cx="55" cy="60" r="30" fill="none" stroke="#4c7fff" stroke-width="14" stroke-dasharray="70 118" transform="rotate(-90 55 60)" class="chart-donut-arc" style="animation-delay:0s"/>
-              <circle cx="55" cy="60" r="30" fill="none" stroke="#f5821f" stroke-width="14" stroke-dasharray="35 153" stroke-dashoffset="-70" transform="rotate(-90 55 60)" class="chart-donut-arc" style="animation-delay:.4s"/>
-              <rect x="104" y="26" width="70" height="24" rx="4" fill="#162463"/>
-              <rect x="104" y="56" width="70" height="24" rx="4" fill="#162463"/>
-              <rect x="104" y="86" width="70" height="16" rx="4" fill="#162463"/>
-              <circle cx="114" cy="38" r="4" fill="#4fd1c5" class="chart-bullet" style="animation-delay:0s"/>
-              <circle cx="114" cy="68" r="4" fill="#e14fa0" class="chart-bullet" style="animation-delay:.6s"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">Data Analytics</span>
-            <h3>Fieldnote Ops Analytics</h3>
-            <p>Real-time operations reporting that surfaced bottlenecks the ops team had been guessing at for months.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ===== WEB & APP DEVELOPMENT ===== -->
-    <div class="category-block" data-reveal>
-      <div class="category-head">
-        <h2>💻 Web &amp; App Development</h2>
-        <span>2 projects</span>
-      </div>
-      <div class="project-grid">
-
-        <div class="project-card" data-cat="web" id="loomwell-storefront">
-          <div class="project-thumb thumb-2">
-            <svg viewBox="0 0 200 120" width="72%" height="72%" fill="none">
-              <rect x="14" y="6" width="172" height="100" rx="6" fill="#241150" stroke="#8b5fe8" stroke-width="1.5"/>
-              <rect x="14" y="6" width="172" height="16" rx="6" fill="#2f1a6b"/>
-              <circle cx="24" cy="14" r="2" fill="#e14fa0"/>
-              <rect x="26" y="32" width="60" height="66" rx="4" fill="#3a2178" stroke="#8b5fe8" stroke-width="1"/>
-              <path d="M40 52 h32 M40 62 h32 M40 72 h20" stroke="#c9b8ff" stroke-width="2" stroke-linecap="round"/>
-              <path d="M46 40 a10 10 0 0 1 20 0" stroke="#e14fa0" stroke-width="2.5" fill="none"/>
-              <rect x="98" y="32" width="76" height="30" rx="4" fill="#3a2178"/>
-              <rect x="98" y="68" width="76" height="30" rx="4" fill="#3a2178"/>
-              <circle cx="112" cy="47" r="8" fill="#f5821f"/>
-              <circle cx="112" cy="83" r="8" fill="#4fd1c5"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">Web Development</span>
-            <h3>Loomwell Storefront Rebuild</h3>
-            <p>A headless storefront migration that improved page speed and lifted conversion by 34%.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-cat="web" id="harborline-app">
-          <div class="project-thumb thumb-2">
-            <svg viewBox="0 0 200 120" width="55%" height="90%" fill="none">
-              <rect x="60" y="4" width="80" height="112" rx="14" fill="#241150" stroke="#8b5fe8" stroke-width="1.5"/>
-              <rect x="68" y="18" width="64" height="72" rx="4" fill="#3a2178"/>
-              <rect x="76" y="26" width="48" height="8" rx="2" fill="#c9b8ff"/>
-              <rect x="76" y="40" width="20" height="20" rx="3" fill="#4fd1c5"/>
-              <rect x="100" y="40" width="20" height="20" rx="3" fill="#e14fa0"/>
-              <rect x="76" y="64" width="44" height="6" rx="2" fill="#8b8fd6"/>
-              <rect x="76" y="74" width="30" height="6" rx="2" fill="#8b8fd6"/>
-              <circle cx="100" cy="102" r="6" fill="#f5821f"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">App Development</span>
-            <h3>Harborline Booking App</h3>
-            <p>A cross-platform booking app that replaced three disconnected spreadsheets with one live calendar.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ===== UI/UX DESIGN ===== -->
-    <div class="category-block" data-reveal>
-      <div class="category-head">
-        <h2>🎨 UI/UX Design</h2>
-        <span>2 projects</span>
-      </div>
-      <div class="project-grid">
-
-        <div class="project-card" data-cat="uiux" id="nimbus-app-ux">
-          <div class="project-thumb thumb-3">
-            <svg viewBox="0 0 200 120" width="55%" height="90%" fill="none">
-              <rect x="60" y="4" width="80" height="112" rx="14" fill="#0a0e27" stroke="#e14fa0" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <rect x="68" y="18" width="64" height="14" rx="2" fill="none" stroke="#8b5fe8" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <circle cx="100" cy="55" r="18" fill="none" stroke="#4fd1c5" stroke-width="1.4" stroke-dasharray="3 2"/>
-              <rect x="68" y="82" width="64" height="10" rx="4" fill="#e14fa0"/>
-              <path d="M76 100 h48" stroke="#8b8fd6" stroke-width="1.2" stroke-dasharray="2 2"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">UI/UX Design</span>
-            <h3>Nimbus Mobile App UX</h3>
-            <p>A full onboarding-flow redesign that cut first-week drop-off by nearly half.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-cat="uiux" id="vantage-dashboard-ux">
-          <div class="project-thumb thumb-1">
-            <svg viewBox="0 0 200 120" width="72%" height="72%" fill="none">
-              <rect x="10" y="8" width="180" height="104" rx="8" fill="#0a0e27" stroke="#4fd1c5" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <rect x="22" y="22" width="50" height="30" rx="3" fill="none" stroke="#4c7fff" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <rect x="80" y="22" width="50" height="30" rx="3" fill="none" stroke="#8b5fe8" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <rect x="138" y="22" width="42" height="30" rx="3" fill="none" stroke="#e14fa0" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <rect x="22" y="62" width="158" height="38" rx="3" fill="none" stroke="#4fd1c5" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <path d="M32 90 l20 -18 20 10 20 -22 20 14 20 -8" stroke="#4fd1c5" stroke-width="2" fill="none"/>
-              <circle r="3.5" fill="#4fd1c5" class="chart-trend-dot" style="offset-path:path('M32 90 l20 -18 20 10 20 -22 20 14 20 -8')"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">UI/UX Design</span>
-            <h3>Vantage Dashboard UX</h3>
-            <p>Wireframe-to-prototype UX work that gave a data team a dashboard they actually asked for.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ===== BRANDING & GRAPHICS ===== -->
-    <div class="category-block" data-reveal>
-      <div class="category-head">
-        <h2>🖌️ Branding &amp; Graphics</h2>
-        <span>2 projects</span>
-      </div>
-      <div class="project-grid">
-
-        <div class="project-card" data-cat="branding" id="aperture-brand-system">
-          <div class="project-thumb thumb-3">
-            <svg viewBox="0 0 200 120" width="72%" height="72%" fill="none">
-              <rect x="20" y="16" width="70" height="70" rx="10" fill="#4c7fff" transform="rotate(-6 55 51)"/>
-              <rect x="55" y="24" width="70" height="70" rx="10" fill="#8b5fe8" transform="rotate(4 90 59)" opacity="0.92"/>
-              <rect x="90" y="18" width="70" height="70" rx="10" fill="#e14fa0" transform="rotate(-3 125 53)" opacity="0.9"/>
-              <circle cx="100" cy="55" r="16" fill="#0a0e27" stroke="#f5821f" stroke-width="2"/>
-              <path d="M93 55 l5 5 9 -11" stroke="#f5821f" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">Branding &amp; UI</span>
-            <h3>Aperture Brand System</h3>
-            <p>Full visual identity and component library for an early-stage SaaS product.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-cat="branding" id="orbitmark-identity">
-          <div class="project-thumb thumb-2">
-            <svg viewBox="0 0 200 120" width="72%" height="72%" fill="none">
-              <rect x="18" y="18" width="36" height="36" rx="8" fill="#4c7fff"/>
-              <circle cx="90" cy="36" r="18" fill="#8b5fe8"/>
-              <polygon points="146,18 168,54 124,54" fill="#e14fa0"/>
-              <text x="30" y="98" font-family="Space Grotesk, sans-serif" font-size="34" font-weight="700" fill="#f5821f">Aa</text>
-              <rect x="90" y="76" width="90" height="10" rx="5" fill="#4fd1c5"/>
-              <rect x="90" y="92" width="60" height="6" rx="3" fill="#8b8fd6"/>
-            </svg>
-          </div>
-          <div class="project-body">
-            <span class="project-tag">Branding &amp; Graphics</span>
-            <h3>Orbitmark Logo &amp; Identity</h3>
-            <p>Logo, type system, and color palette built for a startup preparing to fundraise.</p>
-            <a href="#" class="project-link" data-open-project>View case study →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
+<section data-sec="projects.2">
+<div class="wrap">
+<div class="filter-row" data-reveal="">
+<button class="filter-btn active" data-filter="all">All Projects</button>
+<button class="filter-btn" data-filter="data">Data Analytics</button>
+<button class="filter-btn" data-filter="web">Web &amp; App Development</button>
+<button class="filter-btn" data-filter="uiux">UI/UX Design</button>
+<button class="filter-btn" data-filter="branding">Branding &amp; Graphics</button>
+</div>
+<!-- ===== DATA ANALYTICS ===== -->
+<div class="category-block" data-reveal="">
+<div class="category-head">
+<h2 data-edit="projects.5">📊 Data Analytics &amp; Insights</h2>
+<span>2 projects</span>
+</div>
+<div class="project-grid">
+<div class="project-card" data-cat="data" id="northstar-dashboard">
+<div class="project-thumb thumb-1">
+<svg fill="none" height="70%" viewbox="0 0 200 120" width="70%">
+<rect fill="#0d1740" height="104" rx="8" stroke="#4c7fff" stroke-width="1.5" width="180" x="10" y="8"></rect>
+<circle cx="24" cy="20" fill="#e14fa0" r="2.5"></circle>
+<circle cx="33" cy="20" fill="#f5821f" r="2.5"></circle>
+<circle cx="42" cy="20" fill="#4fd1c5" r="2.5"></circle>
+<line stroke="#233a8a" stroke-width="1" x1="10" x2="190" y1="30" y2="30"></line>
+<rect class="chart-bar" fill="#4c7fff" height="32" rx="2" style="animation-delay:0s" width="14" x="22" y="70"></rect>
+<rect class="chart-bar" fill="#8b5fe8" height="47" rx="2" style="animation-delay:.15s" width="14" x="44" y="55"></rect>
+<rect class="chart-bar" fill="#4fd1c5" height="62" rx="2" style="animation-delay:.3s" width="14" x="66" y="40"></rect>
+<rect class="chart-bar" fill="#4c7fff" height="42" rx="2" style="animation-delay:.45s" width="14" x="88" y="60"></rect>
+<rect class="chart-bar" fill="#8b5fe8" height="54" rx="2" style="animation-delay:.6s" width="14" x="110" y="48"></rect>
+<polyline fill="none" points="130,80 145,55 160,68 178,42" stroke="#f5821f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></polyline>
+<circle class="chart-trend-dot" fill="#f5821f" r="3.5" style="offset-path:path('M130,80 L145,55 L160,68 L178,42')"></circle>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">Data Analytics</span>
+<h3>Northstar Sales Dashboard</h3>
+<p>A Power BI + SQL reporting layer that cut weekly reporting time by 70% for a 40-person sales team.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+<div class="project-card" data-cat="data" id="fieldnote-analytics">
+<div class="project-thumb thumb-1">
+<svg fill="none" height="70%" viewbox="0 0 200 120" width="70%">
+<rect fill="#0d1740" height="104" rx="8" stroke="#4c7fff" stroke-width="1.5" width="180" x="10" y="8"></rect>
+<circle cx="55" cy="60" fill="none" r="30" stroke="#233a8a" stroke-width="14"></circle>
+<circle class="chart-donut-arc" cx="55" cy="60" fill="none" r="30" stroke="#4c7fff" stroke-dasharray="70 118" stroke-width="14" style="animation-delay:0s" transform="rotate(-90 55 60)"></circle>
+<circle class="chart-donut-arc" cx="55" cy="60" fill="none" r="30" stroke="#f5821f" stroke-dasharray="35 153" stroke-dashoffset="-70" stroke-width="14" style="animation-delay:.4s" transform="rotate(-90 55 60)"></circle>
+<rect fill="#162463" height="24" rx="4" width="70" x="104" y="26"></rect>
+<rect fill="#162463" height="24" rx="4" width="70" x="104" y="56"></rect>
+<rect fill="#162463" height="16" rx="4" width="70" x="104" y="86"></rect>
+<circle class="chart-bullet" cx="114" cy="38" fill="#4fd1c5" r="4" style="animation-delay:0s"></circle>
+<circle class="chart-bullet" cx="114" cy="68" fill="#e14fa0" r="4" style="animation-delay:.6s"></circle>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">Data Analytics</span>
+<h3>Fieldnote Ops Analytics</h3>
+<p>Real-time operations reporting that surfaced bottlenecks the ops team had been guessing at for months.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== WEB & APP DEVELOPMENT ===== -->
+<div class="category-block" data-reveal="">
+<div class="category-head">
+<h2 data-edit="projects.6">💻 Web &amp; App Development</h2>
+<span>2 projects</span>
+</div>
+<div class="project-grid">
+<div class="project-card" data-cat="web" id="loomwell-storefront">
+<div class="project-thumb thumb-2">
+<svg fill="none" height="72%" viewbox="0 0 200 120" width="72%">
+<rect fill="#241150" height="100" rx="6" stroke="#8b5fe8" stroke-width="1.5" width="172" x="14" y="6"></rect>
+<rect fill="#2f1a6b" height="16" rx="6" width="172" x="14" y="6"></rect>
+<circle cx="24" cy="14" fill="#e14fa0" r="2"></circle>
+<rect fill="#3a2178" height="66" rx="4" stroke="#8b5fe8" stroke-width="1" width="60" x="26" y="32"></rect>
+<path d="M40 52 h32 M40 62 h32 M40 72 h20" stroke="#c9b8ff" stroke-linecap="round" stroke-width="2"></path>
+<path d="M46 40 a10 10 0 0 1 20 0" fill="none" stroke="#e14fa0" stroke-width="2.5"></path>
+<rect fill="#3a2178" height="30" rx="4" width="76" x="98" y="32"></rect>
+<rect fill="#3a2178" height="30" rx="4" width="76" x="98" y="68"></rect>
+<circle cx="112" cy="47" fill="#f5821f" r="8"></circle>
+<circle cx="112" cy="83" fill="#4fd1c5" r="8"></circle>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">Web Development</span>
+<h3>Loomwell Storefront Rebuild</h3>
+<p>A headless storefront migration that improved page speed and lifted conversion by 34%.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+<div class="project-card" data-cat="web" id="harborline-app">
+<div class="project-thumb thumb-2">
+<svg fill="none" height="90%" viewbox="0 0 200 120" width="55%">
+<rect fill="#241150" height="112" rx="14" stroke="#8b5fe8" stroke-width="1.5" width="80" x="60" y="4"></rect>
+<rect fill="#3a2178" height="72" rx="4" width="64" x="68" y="18"></rect>
+<rect fill="#c9b8ff" height="8" rx="2" width="48" x="76" y="26"></rect>
+<rect fill="#4fd1c5" height="20" rx="3" width="20" x="76" y="40"></rect>
+<rect fill="#e14fa0" height="20" rx="3" width="20" x="100" y="40"></rect>
+<rect fill="#8b8fd6" height="6" rx="2" width="44" x="76" y="64"></rect>
+<rect fill="#8b8fd6" height="6" rx="2" width="30" x="76" y="74"></rect>
+<circle cx="100" cy="102" fill="#f5821f" r="6"></circle>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">App Development</span>
+<h3>Harborline Booking App</h3>
+<p>A cross-platform booking app that replaced three disconnected spreadsheets with one live calendar.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== UI/UX DESIGN ===== -->
+<div class="category-block" data-reveal="">
+<div class="category-head">
+<h2 data-edit="projects.7">🎨 UI/UX Design</h2>
+<span>2 projects</span>
+</div>
+<div class="project-grid">
+<div class="project-card" data-cat="uiux" id="nimbus-app-ux">
+<div class="project-thumb thumb-3">
+<svg fill="none" height="90%" viewbox="0 0 200 120" width="55%">
+<rect fill="#0a0e27" height="112" rx="14" stroke="#e14fa0" stroke-dasharray="4 3" stroke-width="1.5" width="80" x="60" y="4"></rect>
+<rect fill="none" height="14" rx="2" stroke="#8b5fe8" stroke-dasharray="2 2" stroke-width="1.2" width="64" x="68" y="18"></rect>
+<circle cx="100" cy="55" fill="none" r="18" stroke="#4fd1c5" stroke-dasharray="3 2" stroke-width="1.4"></circle>
+<rect fill="#e14fa0" height="10" rx="4" width="64" x="68" y="82"></rect>
+<path d="M76 100 h48" stroke="#8b8fd6" stroke-dasharray="2 2" stroke-width="1.2"></path>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">UI/UX Design</span>
+<h3>Nimbus Mobile App UX</h3>
+<p>A full onboarding-flow redesign that cut first-week drop-off by nearly half.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+<div class="project-card" data-cat="uiux" id="vantage-dashboard-ux">
+<div class="project-thumb thumb-1">
+<svg fill="none" height="72%" viewbox="0 0 200 120" width="72%">
+<rect fill="#0a0e27" height="104" rx="8" stroke="#4fd1c5" stroke-dasharray="4 3" stroke-width="1.5" width="180" x="10" y="8"></rect>
+<rect fill="none" height="30" rx="3" stroke="#4c7fff" stroke-dasharray="2 2" stroke-width="1.2" width="50" x="22" y="22"></rect>
+<rect fill="none" height="30" rx="3" stroke="#8b5fe8" stroke-dasharray="2 2" stroke-width="1.2" width="50" x="80" y="22"></rect>
+<rect fill="none" height="30" rx="3" stroke="#e14fa0" stroke-dasharray="2 2" stroke-width="1.2" width="42" x="138" y="22"></rect>
+<rect fill="none" height="38" rx="3" stroke="#4fd1c5" stroke-dasharray="2 2" stroke-width="1.2" width="158" x="22" y="62"></rect>
+<path d="M32 90 l20 -18 20 10 20 -22 20 14 20 -8" fill="none" stroke="#4fd1c5" stroke-width="2"></path>
+<circle class="chart-trend-dot" fill="#4fd1c5" r="3.5" style="offset-path:path('M32 90 l20 -18 20 10 20 -22 20 14 20 -8')"></circle>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">UI/UX Design</span>
+<h3>Vantage Dashboard UX</h3>
+<p>Wireframe-to-prototype UX work that gave a data team a dashboard they actually asked for.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== BRANDING & GRAPHICS ===== -->
+<div class="category-block" data-reveal="">
+<div class="category-head">
+<h2 data-edit="projects.8">🖌️ Branding &amp; Graphics</h2>
+<span>2 projects</span>
+</div>
+<div class="project-grid">
+<div class="project-card" data-cat="branding" id="aperture-brand-system">
+<div class="project-thumb thumb-3">
+<svg fill="none" height="72%" viewbox="0 0 200 120" width="72%">
+<rect fill="#4c7fff" height="70" rx="10" transform="rotate(-6 55 51)" width="70" x="20" y="16"></rect>
+<rect fill="#8b5fe8" height="70" opacity="0.92" rx="10" transform="rotate(4 90 59)" width="70" x="55" y="24"></rect>
+<rect fill="#e14fa0" height="70" opacity="0.9" rx="10" transform="rotate(-3 125 53)" width="70" x="90" y="18"></rect>
+<circle cx="100" cy="55" fill="#0a0e27" r="16" stroke="#f5821f" stroke-width="2"></circle>
+<path d="M93 55 l5 5 9 -11" fill="none" stroke="#f5821f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">Branding &amp; UI</span>
+<h3>Aperture Brand System</h3>
+<p>Full visual identity and component library for an early-stage SaaS product.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+<div class="project-card" data-cat="branding" id="orbitmark-identity">
+<div class="project-thumb thumb-2">
+<svg fill="none" height="72%" viewbox="0 0 200 120" width="72%">
+<rect fill="#4c7fff" height="36" rx="8" width="36" x="18" y="18"></rect>
+<circle cx="90" cy="36" fill="#8b5fe8" r="18"></circle>
+<polygon fill="#e14fa0" points="146,18 168,54 124,54"></polygon>
+<text fill="#f5821f" font-family="Space Grotesk, sans-serif" font-size="34" font-weight="700" x="30" y="98">Aa</text>
+<rect fill="#4fd1c5" height="10" rx="5" width="90" x="90" y="76"></rect>
+<rect fill="#8b8fd6" height="6" rx="3" width="60" x="90" y="92"></rect>
+</svg>
+</div>
+<div class="project-body">
+<span class="project-tag">Branding &amp; Graphics</span>
+<h3>Orbitmark Logo &amp; Identity</h3>
+<p>Logo, type system, and color palette built for a startup preparing to fundraise.</p>
+<a class="project-link" data-open-project="" href="#">View case study →</a>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-
 <!-- ============ CTA ============ -->
-<section class="section-alt">
-  <div class="wrap" style="text-align:center;" data-reveal>
-    <p class="eyebrow" style="justify-content:center;">Have something similar in mind?</p>
-    <h2 style="margin-bottom:20px;">Let's scope your project.</h2>
-    <button class="btn btn-primary" onclick="document.getElementById('bookFab').click()">Book a consultation</button>
-  </div>
+<section class="section-alt" data-sec="projects.3">
+<div class="wrap" data-reveal="" style="text-align:center;">
+<p class="eyebrow" data-edit="projects.9" style="justify-content:center;">Have something similar in mind?</p>
+<h2 data-edit="projects.10" style="margin-bottom:20px;">Let's scope your project.</h2>
+<button class="btn btn-primary" data-edit="projects.11" onclick="document.getElementById('bookFab').click()">Book a consultation</button>
+</div>
 </section>
-
-
 <footer>
-  <div class="wrap">
-    <p>© 2026 Uchenna Godswill · Founder, CupidCreativeX Ventures. Built with intent, not templates.</p>
-    <p>Data · Design · Development · Agile</p>
-  </div>
+<div class="wrap">
+<p>© 2026 Uchenna Godswill · Founder, CupidCreativeX Ventures. Built with intent, not templates.</p>
+<p>Data · Design · Development · Agile</p>
+</div>
 </footer>
-
 <!-- ============ BIO CARD MODAL ============ -->
-<div class="bio-overlay" id="bioOverlay" role="dialog" aria-modal="true" aria-labelledby="bioName">
-  <div class="bio-modal bio2">
-    <button class="book-close" id="bioClose" aria-label="Close bio card">✕</button>
-    <div class="bio-cover"></div>
-    <div class="bio-head2">
-      <div class="avatar-frame bio-avatar"><div class="avatar-inner"><img src="assets/cupidcreativex-mark.png" alt="Uchenna Godswill"></div></div>
-      <div class="bio-id"><h3 id="bioName">Uchenna Godswill</h3><p class="bio-title">Founder, CupidCreativeX Ventures</p><span class="bio-badge"><i class="pulse"></i> Available for new projects</span></div>
-    </div>
-    <div class="bio-actions">
-      <a class="btn btn-primary" href="mailto:uchennagodswill9@gmail.com">✉️ Email</a>
-      <a class="btn btn-ghost" href="tel:+2349039454419">📞 Call</a>
-      <a class="btn btn-ghost" href="https://wa.me/2349039454419" target="_blank" rel="noopener">💬 WhatsApp</a>
-      <button type="button" class="btn btn-ghost" data-cv-open>📄 View CV</button>
-    </div>
-    <div class="bio-stats"><div><b>5+</b><span>Years experience</span></div><div><b>7</b><span>Core services</span></div><div><b>2026</b><span>Leading full-SDLC teams</span></div></div>
-    <div class="bio-tabs" role="tablist"><button class="on" role="tab" data-bt="about">Overview</button><button role="tab" data-bt="exp">Experience</button><button role="tab" data-bt="skills">Skills</button><button role="tab" data-bt="connect">Connect</button></div>
-    <div class="bio-body">
-      <div class="bio-pane" data-bp="about"><p>I’m a detail‑driven Web Developer and Data Analyst who transforms raw data into clear, actionable insights that help businesses grow, optimize operations, and improve customer experiences. My work spans sales performance analysis, onboarding optimization, A/B testing, dashboard automation, SEO integration, Database management, customer support and time-attendance analytics — all focused on delivering measurable results.</p><p>I specialize in building automated BI dashboards, scalable SEO-integrated and responsive web applications, uncovering trends that guide strategic decisions, and partnering with stakeholders to solve real business problems. Whether it’s improving retention, boosting sales, or streamlining reporting workflows, I bring a mix of technical skill and business insight that helps teams act faster and smarter.</p><p>My toolkit includes Power BI, Tableau, SQL, Python, and advanced Excel — supported by strong communication, problem‑solving, and analytical thinking. I’m passionate about continuous learning and using data to create meaningful impact.
+<div aria-labelledby="bioName" aria-modal="true" class="bio-overlay" id="bioOverlay" role="dialog">
+<div class="bio-modal bio2">
+<button aria-label="Close bio card" class="book-close" id="bioClose">✕</button>
+<div class="bio-cover"></div>
+<div class="bio-head2">
+<div class="avatar-frame bio-avatar"><div class="avatar-inner"><img alt="Uchenna Godswill" src="assets/cupidcreativex-mark.png"/></div></div>
+<div class="bio-id"><h3 id="bioName">Uchenna Godswill</h3><p class="bio-title" data-edit="bio.1">Founder, CupidCreativeX Ventures</p><span class="bio-badge"><i class="pulse"></i> Available for new projects</span></div>
+</div>
+<div class="bio-actions">
+<a class="btn btn-primary" data-edit="bio.2" href="mailto:uchennagodswill9@gmail.com">✉️ Email</a>
+<a class="btn btn-ghost" data-edit="bio.3" href="tel:+2349039454419">📞 Call</a>
+<a class="btn btn-ghost" data-edit="bio.4" href="https://wa.me/2349039454419" rel="noopener" target="_blank">💬 WhatsApp</a>
+<button class="btn btn-ghost" data-cv-open="" data-edit="bio.5" type="button">📄 View CV</button>
+</div>
+<div class="bio-stats"><div><b>5+</b><span>Years experience</span></div><div><b>7</b><span>Core services</span></div><div><b>2026</b><span>Leading full-SDLC teams</span></div></div>
+<div class="bio-tabs" role="tablist"><button class="on" data-bt="about" role="tab">Overview</button><button data-bt="exp" role="tab">Experience</button><button data-bt="skills" role="tab">Skills</button><button data-bt="connect" role="tab">Connect</button></div>
+<div class="bio-body">
+<div class="bio-pane" data-bp="about"><p data-edit="bio.6">I’m a detail‑driven Web Developer and Data Analyst who transforms raw data into clear, actionable insights that help businesses grow, optimize operations, and improve customer experiences. My work spans sales performance analysis, onboarding optimization, A/B testing, dashboard automation, SEO integration, Database management, customer support and time-attendance analytics — all focused on delivering measurable results.</p><p data-edit="bio.7">I specialize in building automated BI dashboards, scalable SEO-integrated and responsive web applications, uncovering trends that guide strategic decisions, and partnering with stakeholders to solve real business problems. Whether it’s improving retention, boosting sales, or streamlining reporting workflows, I bring a mix of technical skill and business insight that helps teams act faster and smarter.</p><p data-edit="bio.8">My toolkit includes Power BI, Tableau, SQL, Python, and advanced Excel — supported by strong communication, problem‑solving, and analytical thinking. I’m passionate about continuous learning and using data to create meaningful impact.
 
 If you’re looking for a data analyst who blends technical expertise with strategic thinking and consistently delivers results, let’s connect.</p>
-        <div class="bio-facts2"><div><span>📍 Location</span><b><!-- EDIT ME -->Nigeria</b></div><div><span>💼 Currently</span><b>ICT Personnel, Seahorse Lubricant Industries Ltd</b></div>
-        <div><span>✉️ Email</span><b><a href="mailto:uchennagodswill9@gmail.com">uchennagodswill9@gmail.com</a></b></div><div><span>📞 Phone</span><b><a href="tel:+2349039454419">+2349039454419</a></b></div></div></div>
-      <div class="bio-pane" data-bp="exp" hidden><div class="bio-timeline">
-        <div class="tl-item"><b>2020</b><span>Started the Journey in the world of designing, stunning visual creations, UI design, UX Researching &amp; Designing, CMS designs</span></div>
-        <div class="tl-item"><b>2021</b><span>Decided to find out what actually works behind the visual aspects. Moved into Web Dev (HTML, CSS, JavaScript, WordPress) then into PHP, plugin &amp; theme development, RESTful APIs development and integration, SEO keyword writing and integration...</span></div>
-        <div class="tl-item"><b>2022</b><span>Added full-stack development to close the design-to-code gap.</span></div>
-        <div class="tl-item"><b>2023 &amp; 2024</b><span>Delivered my highest number of projects in web development.</span></div>
-        <div class="tl-item"><b>2025</b><span>Got a job as an organization's IT support personnel &amp; systems analyst — the role of bridging a business organization and their IT needs sparked the zeal into Data Analysis &amp; Project Management.</span></div>
-        <div class="tl-item"><b>2026</b><span>Now leading teams all the way through the SDLC — analyzing, planning, designing, developing, testing and delivering — with data-driven processes and decisions at every step. The journey continues...</span></div>
-      </div>
-    </div>
-      <div class="bio-pane" data-bp="skills" hidden><h4>Core values &amp; tools</h4><div class="pill-row">
-        <span class="pill">Data-first thinking</span>
-        <span class="pill">Systems over one-offs</span>
-        <span  class="pill">Python Analytics</span>
-        <span  class="pill">Business Intelligence (Ms Excel, Power BI, Tableau)</span>
-        <span  class="pill">Stakeholder Collaboration</span>
-        <span  class="pill">Predictive Analytics</span>
-        <span  class="pill">SQL</span>
-        <span  class="pill">Web Dev(HTML,CSS,JS,REACT,PHP,WordPress)</span>
-        <span class="pill">Agile project management practices</span>
-      </div><h4>Core expertise</h4><div class="bio-tags">
-        <span>💻 Web &amp; App Development</span>
-        <span>🤖 Generative AI Services</span>
-        <span>🎨 UI/UX Design</span>
-        <span>📊 Data Analytics &amp; Insights</span>
-        <span>🖌️ Graphics Design</span>
-        <span>🧭 Digital Consultation</span>
-        <span>📣 Digital Marketing</span>
-      </div></div>
-      <div class="bio-pane" data-bp="connect" hidden><h4>Find me online</h4><div class="social-row"><a href="#" aria-label="Twitter / X">𝕏</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Instagram">◎</a></div>
-        <p class="bio-cta-line">Have a project in mind?</p><div class="bio-actions"><button type="button" class="btn btn-primary" data-open-quiz>Start a project</button><a class="btn btn-ghost" href="contact.html">Contact page</a></div></div>
-    </div>
-  </div>
+<div class="bio-facts2"><div><span>📍 Location</span><b><!-- EDIT ME -->Nigeria</b></div><div><span>💼 Currently</span><b>ICT Personnel, Seahorse Lubricant Industries Ltd</b></div>
+<div><span>✉️ Email</span><b><a href="mailto:uchennagodswill9@gmail.com">uchennagodswill9@gmail.com</a></b></div><div><span>📞 Phone</span><b><a href="tel:+2349039454419">+2349039454419</a></b></div></div></div>
+<div class="bio-pane" data-bp="exp" hidden=""><div class="bio-timeline">
+<div class="tl-item"><b>2020</b><span>Started the Journey in the world of designing, stunning visual creations, UI design, UX Researching &amp; Designing, CMS designs</span></div>
+<div class="tl-item"><b>2021</b><span>Decided to find out what actually works behind the visual aspects. Moved into Web Dev (HTML, CSS, JavaScript, WordPress) then into PHP, plugin &amp; theme development, RESTful APIs development and integration, SEO keyword writing and integration...</span></div>
+<div class="tl-item"><b>2022</b><span>Added full-stack development to close the design-to-code gap.</span></div>
+<div class="tl-item"><b>2023 &amp; 2024</b><span>Delivered my highest number of projects in web development.</span></div>
+<div class="tl-item"><b>2025</b><span>Got a job as an organization's IT support personnel &amp; systems analyst — the role of bridging a business organization and their IT needs sparked the zeal into Data Analysis &amp; Project Management.</span></div>
+<div class="tl-item"><b>2026</b><span>Now leading teams all the way through the SDLC — analyzing, planning, designing, developing, testing and delivering — with data-driven processes and decisions at every step. The journey continues...</span></div>
 </div>
-
+</div>
+<div class="bio-pane" data-bp="skills" hidden=""><h4 data-edit="bio.9">Core values &amp; tools</h4><div class="pill-row">
+<span class="pill">Data-first thinking</span>
+<span class="pill">Systems over one-offs</span>
+<span class="pill">Python Analytics</span>
+<span class="pill">Business Intelligence (Ms Excel, Power BI, Tableau)</span>
+<span class="pill">Stakeholder Collaboration</span>
+<span class="pill">Predictive Analytics</span>
+<span class="pill">SQL</span>
+<span class="pill">Web Dev(HTML,CSS,JS,REACT,PHP,WordPress)</span>
+<span class="pill">Agile project management practices</span>
+</div><h4 data-edit="bio.10">Core expertise</h4><div class="bio-tags">
+<span>💻 Web &amp; App Development</span>
+<span>🤖 Generative AI Services</span>
+<span>🎨 UI/UX Design</span>
+<span>📊 Data Analytics &amp; Insights</span>
+<span>🖌️ Graphics Design</span>
+<span>🧭 Digital Consultation</span>
+<span>📣 Digital Marketing</span>
+</div></div>
+<div class="bio-pane" data-bp="connect" hidden=""><h4 data-edit="bio.11">Find me online</h4><div class="social-row"><a aria-label="Twitter / X" href="#">𝕏</a><a aria-label="LinkedIn" href="#">in</a><a aria-label="Instagram" href="#">◎</a></div>
+<p class="bio-cta-line" data-edit="bio.12">Have a project in mind?</p><div class="bio-actions"><button class="btn btn-primary" data-edit="bio.13" data-open-quiz="" type="button">Start a project</button><a class="btn btn-ghost" data-edit="bio.14" href="contact.html">Contact page</a></div></div>
+</div>
+</div>
+</div>
 <!-- ============ PROJECT DETAIL MODAL ============ -->
-<div class="project-overlay" id="projectOverlay" role="dialog" aria-modal="true" aria-labelledby="projTitle">
-  <div class="project-modal">
-    <button class="book-close" id="projectClose" aria-label="Close project details">✕</button>
-
-    <div class="proj-carousel">
-      <div class="proj-slides" id="projSlides"></div>
-      <button type="button" class="proj-arrow proj-prev" id="projPrev" aria-label="Previous image">‹</button>
-      <button type="button" class="proj-arrow proj-next" id="projNext" aria-label="Next image">›</button>
-      <div class="proj-dots" id="projDots"></div>
-    </div>
-
-    <div class="proj-body">
-      <span class="project-tag" id="projTag"></span>
-      <h3 id="projTitle"></h3>
-      <div class="proj-meta">
-        <span>🏢 Client: <b id="projClient"></b></span>
-        <span>⏱️ Duration: <b id="projDuration"></b></span>
-      </div>
-
-      <p class="proj-desc" id="projOverview"></p>
-
-      <div class="proj-section">
-        <h4>Client Request</h4>
-        <p id="projRequest"></p>
-      </div>
-      <div class="proj-section">
-        <h4>Challenge</h4>
-        <p id="projChallenge"></p>
-      </div>
-      <div class="proj-section">
-        <h4>Solution</h4>
-        <p id="projSolution"></p>
-      </div>
-      <div class="proj-section">
-        <h4>Results</h4>
-        <p id="projResults"></p>
-      </div>
-
-      <div class="proj-section">
-        <h4>Tools &amp; Technologies</h4>
-        <div class="proj-tools" id="projTools"></div>
-      </div>
-
-      <div style="margin-top:26px;">
-        <button type="button" class="btn btn-primary" id="projCTA" data-open-quiz>Start a similar project</button>
-      </div>
-    </div>
-  </div>
+<div aria-labelledby="projTitle" aria-modal="true" class="project-overlay" id="projectOverlay" role="dialog">
+<div class="project-modal">
+<button aria-label="Close project details" class="book-close" id="projectClose">✕</button>
+<div class="proj-carousel">
+<div class="proj-slides" id="projSlides"></div>
+<button aria-label="Previous image" class="proj-arrow proj-prev" id="projPrev" type="button">‹</button>
+<button aria-label="Next image" class="proj-arrow proj-next" id="projNext" type="button">›</button>
+<div class="proj-dots" id="projDots"></div>
 </div>
-
+<div class="proj-body">
+<span class="project-tag" id="projTag"></span>
+<h3 id="projTitle"></h3>
+<div class="proj-meta">
+<span>🏢 Client: <b id="projClient"></b></span>
+<span>⏱️ Duration: <b id="projDuration"></b></span>
+</div>
+<p class="proj-desc" id="projOverview"></p>
+<div class="proj-section">
+<h4>Client Request</h4>
+<p id="projRequest"></p>
+</div>
+<div class="proj-section">
+<h4>Challenge</h4>
+<p id="projChallenge"></p>
+</div>
+<div class="proj-section">
+<h4>Solution</h4>
+<p id="projSolution"></p>
+</div>
+<div class="proj-section">
+<h4>Results</h4>
+<p id="projResults"></p>
+</div>
+<div class="proj-section">
+<h4>Tools &amp; Technologies</h4>
+<div class="proj-tools" id="projTools"></div>
+</div>
+<div style="margin-top:26px;">
+<button class="btn btn-primary" data-open-quiz="" id="projCTA" type="button">Start a similar project</button>
+</div>
+</div>
+</div>
+</div>
 <!-- ============ PROJECT QUIZ ============ -->
-<div class="quiz-overlay" id="quizOverlay" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
-  <div class="quiz-modal">
-    <button class="book-close" id="quizClose" aria-label="Close quiz">✕</button>
-
-    <p class="quiz-step-label" id="quizStepLabel">Step 1 of 5</p>
-    <div class="quiz-progress"><div class="quiz-progress-bar" id="quizProgressBar"></div></div>
-
-    <h3 id="quizTitle">Which service(s) do you need?</h3>
-    <p class="quiz-sub" id="quizSub">Select everything that applies — I'll tailor the next questions to your picks.</p>
-
-    <div id="quizBody"></div>
-
-    <div class="quiz-nav">
-      <button type="button" class="btn btn-ghost" id="quizBack">← Back</button>
-      <button type="button" class="btn btn-primary" id="quizNext">Next →</button>
-    </div>
-
-    <div class="quiz-success" id="quizSuccess">
-      <div class="check">✓</div>
-      <h3>Request sent!</h3>
-      <p class="quiz-sub" id="quizStatus">Your email app should have opened with everything filled in — just hit send and I'll be in touch.</p>
-      <p style="font-weight:600; margin:16px 0 10px;">Do you have more enquiries?</p>
-      <div class="quiz-followup">
-        <button class="btn btn-ghost" id="quizMoreYes">Yes, book a consultation</button>
-        <button class="btn btn-ghost" id="quizMoreNo">No, I'm all set</button>
-      </div>
-    </div>
-  </div>
+<div aria-labelledby="quizTitle" aria-modal="true" class="quiz-overlay" id="quizOverlay" role="dialog">
+<div class="quiz-modal">
+<button aria-label="Close quiz" class="book-close" id="quizClose">✕</button>
+<p class="quiz-step-label" id="quizStepLabel">Step 1 of 5</p>
+<div class="quiz-progress"><div class="quiz-progress-bar" id="quizProgressBar"></div></div>
+<h3 id="quizTitle">Which service(s) do you need?</h3>
+<p class="quiz-sub" id="quizSub">Select everything that applies — I'll tailor the next questions to your picks.</p>
+<div id="quizBody"></div>
+<div class="quiz-nav">
+<button class="btn btn-ghost" id="quizBack" type="button">← Back</button>
+<button class="btn btn-primary" id="quizNext" type="button">Next →</button>
 </div>
-
+<div class="quiz-success" id="quizSuccess">
+<div class="check">✓</div>
+<h3>Request sent!</h3>
+<p class="quiz-sub" id="quizStatus">Your email app should have opened with everything filled in — just hit send and I'll be in touch.</p>
+<p style="font-weight:600; margin:16px 0 10px;">Do you have more enquiries?</p>
+<div class="quiz-followup">
+<button class="btn btn-ghost" id="quizMoreYes">Yes, book a consultation</button>
+<button class="btn btn-ghost" id="quizMoreNo">No, I'm all set</button>
+</div>
+</div>
+</div>
+</div>
 <!-- ============ CONSULTATION BOOKING ============ -->
-<button class="book-fab" id="bookFab" aria-haspopup="dialog" aria-controls="bookOverlay">
+<button aria-controls="bookOverlay" aria-haspopup="dialog" class="book-fab" id="bookFab">
   🗓️ Book a Consultation
 </button>
-
-<div class="book-overlay" id="bookOverlay" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
-  <div class="book-modal">
-    <button class="book-close" id="bookClose" aria-label="Close booking form">✕</button>
-
-    <div id="bookForm">
-      <div class="avatar-frame">
-        <div class="avatar-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#9ba7d1" stroke-width="1.4">
-            <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
-          </svg>
-        </div>
-      </div>
-      <h3 id="bookTitle">Book a 1:1 consultation</h3>
-      <p class="book-sub">30 minutes with me, no charge — let's talk through your project before anything is scoped.</p>
-      <form id="consultForm">
-        <div class="field">
-          <label for="bName">Your name</label>
-          <input id="bName" type="text" placeholder="Jordan Lee" required>
-        </div>
-        <div class="field">
-          <label for="bEmail">Email address</label>
-          <input id="bEmail" type="email" placeholder="jordan@company.com" required>
-        </div>
-        <div class="field">
-          <label for="bDate">Preferred date &amp; time</label>
-          <input id="bDate" type="datetime-local" required>
-        </div>
-        <div class="field">
-          <label for="bMsg">What's on your mind?</label>
-          <textarea id="bMsg" placeholder="A quick line about your project..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" id="bookSubmitBtn" style="width:100%; justify-content:center; margin-top:4px;">
+<div aria-labelledby="bookTitle" aria-modal="true" class="book-overlay" id="bookOverlay" role="dialog">
+<div class="book-modal">
+<button aria-label="Close booking form" class="book-close" id="bookClose">✕</button>
+<div id="bookForm">
+<div class="avatar-frame">
+<div class="avatar-inner">
+<svg fill="none" stroke="#9ba7d1" stroke-width="1.4" viewbox="0 0 24 24">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+</svg>
+</div>
+</div>
+<h3 id="bookTitle">Book a 1:1 consultation</h3>
+<p class="book-sub">30 minutes with me, no charge — let's talk through your project before anything is scoped.</p>
+<form id="consultForm">
+<div class="field">
+<label for="bName">Your name</label>
+<input id="bName" placeholder="Jordan Lee" required="" type="text"/>
+</div>
+<div class="field">
+<label for="bEmail">Email address</label>
+<input id="bEmail" placeholder="jordan@company.com" required="" type="email"/>
+</div>
+<div class="field">
+<label for="bDate">Preferred date &amp; time</label>
+<input id="bDate" required="" type="datetime-local"/>
+</div>
+<div class="field">
+<label for="bMsg">What's on your mind?</label>
+<textarea id="bMsg" placeholder="A quick line about your project..."></textarea>
+</div>
+<button class="btn btn-primary" id="bookSubmitBtn" style="width:100%; justify-content:center; margin-top:4px;" type="submit">
           Request consultation
         </button>
-        <p class="form-note" style="margin-top:10px;">Sent straight to Uchenna — you'll see a delivery confirmation below once it's through.</p>
-      </form>
-    </div>
-
-    <div class="book-success" id="bookSuccess">
-      <div class="check">✓</div>
-      <h3>Request sent!</h3>
-      <p class="book-sub" id="bookStatus">Thanks — I'll get back to you shortly to confirm the time.</p>
-      <button class="btn btn-ghost" id="bookAgain" style="width:100%; justify-content:center;">Book another slot</button>
-    </div>
-  </div>
+<p class="form-note" style="margin-top:10px;">Sent straight to Uchenna — you'll see a delivery confirmation below once it's through.</p>
+</form>
 </div>
-
+<div class="book-success" id="bookSuccess">
+<div class="check">✓</div>
+<h3>Request sent!</h3>
+<p class="book-sub" id="bookStatus">Thanks — I'll get back to you shortly to confirm the time.</p>
+<button class="btn btn-ghost" id="bookAgain" style="width:100%; justify-content:center;">Book another slot</button>
+</div>
+</div>
+</div>
 <script src="fx.js"></script>
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script src="cms.js"></script>
-
-
 <script src="config.js"></script>
 <script src="script.js"></script>
 <script src="cms.js"></script>
