@@ -77,6 +77,7 @@
     var hd=g(P+'heading');
     css+=hd?'h1,h2,h3,h4,.display{color:'+hd+'!important}':((mode==='light'||tx)?'h1,h2,h3{color:var(--ink-glow)!important}':'');
     if(mode==='light') css+='header{background:rgba(255,255,255,.85)!important}';
+    var sc=parseInt(s.svc_cols,10); if(sc>=1&&sc<=4) css+='@media(min-width:1024px){#services .grid-6,div:has(> .service-detail){grid-template-columns:repeat('+sc+',minmax(0,1fr))!important}}';
     var stc=g(P+'site_title'); if(stc) css+='.logo,#siteName{color:'+stc+'!important}';
     var sp=s.spin_speed||''; if(sp==='off') css+='.ring-1,.ring-2,.orbit-spin,.orbit-node{animation:none!important}'; if(sp==='slow') css+='.ring-1{animation-duration:52s!important}.ring-2{animation-duration:80s!important}'; if(sp==='fast') css+='.ring-1{animation-duration:12s!important}.ring-2{animation-duration:20s!important}';
     var lh=g(P+'link_hover'); if(lh) css+='a:not(.btn):hover{color:'+lh+'}';

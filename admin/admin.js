@@ -264,12 +264,12 @@ function moreSecs0(s){
 }
 function moreSecs(s){
   var tx=function(k,l,ph){ return '<label>'+l+'<input name="'+k+'" value="'+esc(s[k]||'')+'" placeholder="'+ph+'"></label>'; };
-  return moreSecs0(s)+'<div class="sec"><h3>Customer support chat</h3><p class="muted">The support button appears on every page. FAQs are under <b>Support FAQs</b>; messages arrive under <b>Support tickets</b>.</p>'+
+  return moreSecs0(s)+'<div class="sec"><h3>Layout</h3><p class="muted">Services are a list on phones and a grid on larger screens.</p>'+sel('svc_cols','Services grid on desktop',[['','3 columns (default)'],['2','2 columns'],['4','4 columns'],['1','Single list']],s)+'</div>'+'<div class="sec"><h3>Customer support chat</h3><p class="muted">The support button appears on every page. FAQs are under <b>Support FAQs</b>; messages arrive under <b>Support tickets</b>.</p>'+
     sel('support_enabled','Support chat',[['','On'],['off','Off (hide it)']],s)+
     '<label>Greeting<textarea name="support_greeting" rows="2" placeholder="Hi 👋 How can we help you today?">'+esc(s.support_greeting||'')+'</textarea></label>'+
     tx('support_whatsapp','WhatsApp number','2349039454419 (digits, with country code)')+tx('support_email','Support email','you@example.com')+tx('support_phone','Phone','+234…')+tx('support_hours','Hours line','Mon–Fri, 9am–5pm')+'</div>';
 }
-function morePuts(f,put){ ['support_enabled','support_greeting','support_whatsapp','support_email','support_phone','support_hours'].forEach(function(k){ put(k,f[k].value.trim()); }); ['footer_text','footer_tagline','footer_links','hero_lead','hero_image','avatar_image','spin_speed','cv_url'].forEach(function(k){ put(k,f[k].value.trim()); }); }
+function morePuts(f,put){ ['svc_cols','support_enabled','support_greeting','support_whatsapp','support_email','support_phone','support_hours'].forEach(function(k){ put(k,f[k].value.trim()); }); ['footer_text','footer_tagline','footer_links','hero_lead','hero_image','avatar_image','spin_speed','cv_url'].forEach(function(k){ put(k,f[k].value.trim()); }); }
 function newPuts(f,put){
   MC.forEach(function(m){ ['dk_','lt_'].forEach(function(p){ var k=p+m[0]; put(k,f['use_'+k].checked?f[k].value:''); }); });
   ['anim_enabled','anim_hover','anim_tilt','anim_speed','anim_reveal','anim_button','logo_shape','theme_toggle'].forEach(function(k){ put(k,f[k].value); });
