@@ -1103,7 +1103,7 @@ body.nav-lock{overflow:hidden}
 }
 
 /* ===== services: animated catching grid ===== */
-#services .grid-6,div:has(> .service-detail){display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;counter-reset:svc}
+#services .grid-6,.services-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;counter-reset:svc}
 #services .grid-6>.card,.service-detail{counter-increment:svc;position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:28px 26px;border-radius:20px;border:1px solid var(--line);isolation:isolate;overflow:hidden;
   background:linear-gradient(160deg,rgba(76,127,255,.10),rgba(139,95,232,.05) 55%,rgba(245,130,31,.07))}
 #services .grid-6>.card::after,.service-detail::after{content:counter(svc,decimal-leading-zero);position:absolute;top:10px;right:20px;font:700 46px 'Space Grotesk',sans-serif;color:rgba(255,255,255,.06);transition:.4s;background:none}
@@ -1287,19 +1287,19 @@ a[href*="wa.me"] .gi-fill{color:#25D366}.btn[href*="wa.me"]:hover .gi-fill{color
 .sup-gi{width:30px;height:30px;display:grid;place-items:center;flex:none}.sup-gi .gi{width:24px;height:24px;margin:0}
 
 /* ===== services: 1 col mobile / 2 tablet / 3 desktop, equal-height cards ===== */
-#services .grid-6,div:has(> .service-detail){
+#services .grid-6,.services-list{
   display:grid!important; grid-template-columns:minmax(0,1fr)!important;
   gap:16px!important; align-items:stretch;
 }
 #services .grid-6>.card,.service-detail{ height:100%; min-width:0; }
 
 @media(min-width:700px) and (max-width:1023px){
-  #services .grid-6,div:has(> .service-detail){ grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:20px!important; }
+  #services .grid-6,.services-list{ grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:20px!important; }
   #services .grid-6>.card:last-child:nth-child(odd),
   .service-detail:last-child:nth-child(odd){ grid-column:1/-1; }
 }
 @media(min-width:1024px){
-  #services .grid-6,div:has(> .service-detail){ grid-template-columns:repeat(3,minmax(0,1fr))!important; gap:24px!important; }
+  #services .grid-6,.services-list{ grid-template-columns:repeat(3,minmax(0,1fr))!important; gap:24px!important; }
   #services .grid-6>.card:last-child:nth-child(3n+1),
   .service-detail:last-child:nth-child(3n+1){ grid-column:1/-1; }
 }
